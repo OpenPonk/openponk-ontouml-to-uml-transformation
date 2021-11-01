@@ -13,7 +13,8 @@ Class {
 		'radioGen',
 		'radioGenAndComp',
 		'radioComp',
-		'model'
+		'model',
+		'useForAll'
 	],
 	#category : #'OntoUML-TransformationFramework-UI'
 }
@@ -83,17 +84,17 @@ TransformGeneralizationSetUI >> diagram: anObject [
 	diagram := anObject
 ]
 
-{ #category : #initialization }
+{ #category : #accessing }
 TransformGeneralizationSetUI >> getGenSetName [
 	^ model first generalizationSets first name ifNil: [ 'nameless'. ].
 ]
 
-{ #category : #initialization }
+{ #category : #accessing }
 TransformGeneralizationSetUI >> getGeneralName [
 	^ model first general name.
 ]
 
-{ #category : #initialization }
+{ #category : #accessing }
 TransformGeneralizationSetUI >> getSpecificNames [
 	| names |
 	names := ''.
@@ -138,8 +139,13 @@ TransformGeneralizationSetUI >> initializeDialogWindow: aDialog [
 	aDialog
 		closeOnBackdropClick: false;
 		addButton: 'Confirm'
-			do: [ :presenter | 
-			presenter close ].
+			do: [ :presenter |
+				useForAll := false. 
+				presenter close. ];
+		addButton: 'Confirm for all'
+			do: [ :presenter |
+				useForAll := true. 
+				presenter close. ].
 ]
 
 { #category : #initialization }
@@ -248,19 +254,19 @@ TransformGeneralizationSetUI >> radioGenAndComp: anObject [
 	radioGenAndComp := anObject
 ]
 
-{ #category : #initialization }
+{ #category : #accessing }
 TransformGeneralizationSetUI >> selectComposition [
 	transformation := 'Comp'.
 	diagram image: self imageComposition.
 ]
 
-{ #category : #initialization }
+{ #category : #accessing }
 TransformGeneralizationSetUI >> selectGenAndComp [
 	transformation := 'GenAndComp'.	
 	diagram image: self imageGeneralizationAndComposition.
 ]
 
-{ #category : #initialization }
+{ #category : #accessing }
 TransformGeneralizationSetUI >> selectGeneralization [
 	transformation := 'Gen'.
 	diagram image: self imageGeneralization.
@@ -276,4 +282,16 @@ TransformGeneralizationSetUI >> transformation [
 TransformGeneralizationSetUI >> transformation: anObject [
 
 	transformation := anObject
+]
+
+{ #category : #accessing }
+TransformGeneralizationSetUI >> useForAll [
+
+	^ useForAll
+]
+
+{ #category : #accessing }
+TransformGeneralizationSetUI >> useForAll: anObject [
+
+	useForAll := anObject
 ]

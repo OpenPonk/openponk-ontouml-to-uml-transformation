@@ -30,6 +30,13 @@ OntoUMLTransformGeneralizationSet class >> transformAsGeneralizationAndCompositi
 	^ instance transformAsGeneralizationAndComposition.
 ]
 
+{ #category : #transforming }
+OntoUMLTransformGeneralizationSet class >> transformWithoutCombination: aTransformed withController: aController withTransformer: aTransformer [
+	| instance |
+	instance := self newWithTransformed: aTransformed withController: aController withTransformer: aTransformer.
+	^ instance transformDisjointGeneralization.
+]
+
 { #category : #'private - transforming - generalization' }
 OntoUMLTransformGeneralizationSet >> calculateIndex: aIndex for: aElementPosition [
 	| positionOffset |
@@ -72,14 +79,13 @@ OntoUMLTransformGeneralizationSet >> combineUsingGeneralization: aAddedClass wit
 	aCompositeClass name: aCompositeClass name, aAddedClass name.
 	self copyAttributesFrom: aAddedClass in: aCompositeClass.
 	self copyOperationsFor: aCompositeClass.
-	^ self createGeneralizationWithGeneral: (controller getTransfomedElementFrom: aAddedClass) withSpecific: aCompositeClass.
-	
+	^ {}.
 ]
 
 { #category : #transforming }
 OntoUMLTransformGeneralizationSet >> combineUsingGeneralizationAndComposition: aAddedClass with: aCompositeClass [
 	aCompositeClass name: aCompositeClass name, aAddedClass name.
-	^ self createCompositionWithSource: (controller getTransfomedElementFrom: aAddedClass) withTarget: aCompositeClass.
+	^ { self createCompositionWithSource: (controller getTransfomedElementFrom: aAddedClass) withTarget: aCompositeClass. }.
 	
 ]
 
@@ -116,7 +122,7 @@ OntoUMLTransformGeneralizationSet >> createClassCombination [
 	results add: (self createGeneralizationFor: newClass).
 	results addAll: ((1 to: index size) flatCollect: [ :i |
 		(index at: i) > 0 
-			ifTrue: [ {self combineClass: (elements at: i) with: newClass.}. ]
+			ifTrue: [ self combineClass: (elements at: i) with: newClass. ]
 			ifFalse: [ {}. ]. ]).
 	results do: [ :element | controller addElementToTransformedModel: element. ].
 	^ results.
@@ -161,11 +167,20 @@ OntoUMLTransformGeneralizationSet >> createGeneralizationWithGeneral: aGeneral w
 
 { #category : #transforming }
 OntoUMLTransformGeneralizationSet >> getSelection [
+	| transformation |
+	transformation := transformer class savedTransformation.
+	^ transformation ifNil: [ self getSelectionUsingModalWindow. ].
+	
+]
+
+{ #category : #transforming }
+OntoUMLTransformGeneralizationSet >> getSelectionUsingModalWindow [
 	| dialogWindow |
 	dialogWindow := TransformGeneralizationSetUI basicNew.
 	dialogWindow model: transformed.
 	dialogWindow initialize.
 	dialogWindow openModalWithSpec.
+	dialogWindow useForAll ifTrue: [ transformer class savedTransformation: dialogWindow transformation. ].
 	^ dialogWindow transformation.
 	
 ]

@@ -72,7 +72,9 @@ OntoUMLTransformationController >> tranformGeneralizationSets [
 	| genSets | 
 	genSets := OntoUMLModelQuery getGeneralizationSetsFrom: originalModel.
 	genSets ifNil: [ ^ self. ].
+	OntoUMLGeneralizationSetTransformer savedTransformation: nil.
 	genSets do: [ :genSet | 	OntoUMLGeneralizationSetTransformer transform: genSet withController: self. ].
+	
 ]
 
 { #category : #'private - transforming' }

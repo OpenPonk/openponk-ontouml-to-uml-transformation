@@ -5,6 +5,9 @@ Class {
 		'generalizations',
 		'name'
 	],
+	#classInstVars : [
+		'savedTransformation'
+	],
 	#category : #'OntoUML-TransformationFramework-Transformers'
 }
 
@@ -29,6 +32,18 @@ OntoUMLGeneralizationSetTransformer class >> initializeTransformationIndex [
 ]
 
 { #category : #accessing }
+OntoUMLGeneralizationSetTransformer class >> savedTransformation [
+
+	^ savedTransformation
+]
+
+{ #category : #accessing }
+OntoUMLGeneralizationSetTransformer class >> savedTransformation: anObject [
+
+	savedTransformation := anObject
+]
+
+{ #category : #accessing }
 OntoUMLGeneralizationSetTransformer >> general [
 	^ controller getTransfomedElementFrom: transformed generalizations first general.
 ]
@@ -47,17 +62,32 @@ OntoUMLGeneralizationSetTransformer >> name: anObject [
 
 { #category : #transforming }
 OntoUMLGeneralizationSetTransformer >> transform [
-	generalizations := OrderedCollection new.
-	generalizations addAll: transformed generalizations.
-	^ self class generalizationSetGroups collect: [ :group | self transformGroup: group. ].
+	(OntoUMLModelQuery isStereotypeOf: transformed generalizations first general oclKindOf: 'Sortal') 
+		ifTrue: [ ^ self transformSortalGenSet.]
+		ifFalse: [ ^ self transformNonSortalGenSet. ].
 ]
 
 { #category : #transforming }
 OntoUMLGeneralizationSetTransformer >> transformGroup: aGroup [
 	| transformedGeneralizations transformation result |
 	transformedGeneralizations := generalizations select: [ :generalization | OntoUMLModelQuery isStereotypeOf: generalization specific oclKindOf: aGroup. ].
+	transformedGeneralizations ifEmpty: [ ^{}. ].
 	transformation := self class getTransformation: aGroup.
 	result := transformation value: transformedGeneralizations value: controller value: self.
 	generalizations removeAll: transformedGeneralizations.
 	^ result.
+]
+
+{ #category : #transforming }
+OntoUMLGeneralizationSetTransformer >> transformNonSortalGenSet [ 
+	generalizations := OrderedCollection new.
+	generalizations addAll: transformed generalizations.
+	^ OntoUMLTransformGeneralizationSet transformWithoutCombination: generalizations withController: controller withTransformer: self.
+]
+
+{ #category : #transforming }
+OntoUMLGeneralizationSetTransformer >> transformSortalGenSet [
+	generalizations := OrderedCollection new.
+	generalizations addAll: transformed generalizations.
+	^ self class generalizationSetGroups collect: [ :group | self transformGroup: group. ].
 ]
