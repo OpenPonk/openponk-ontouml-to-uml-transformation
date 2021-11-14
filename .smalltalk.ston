@@ -1,0 +1,20 @@
+SmalltalkCISpec {
+	#loading : [
+		SCIMetacelloLoadSpec {
+			#platforms : [
+				#pharo
+			],
+			#baseline : 'OntoUMLTransformationFramework'
+		}
+	],
+	#testing : {
+		#coverage : {
+			#packages : [
+				'OntoUML-Transformation*'
+			]
+		},
+		#packages : [
+			'OntoUML-Transformation*'
+		]
+	}
+}
