@@ -4,7 +4,8 @@ SmalltalkCISpec {
 			#platforms : [
 				#pharo
 			],
-			#baseline : 'OntoUMLTransformationFramework'
+			#baseline : 'OntoUMLTransformationFramework',			
+			#directory : 'src'
 		}
 	],
 	#testing : {
