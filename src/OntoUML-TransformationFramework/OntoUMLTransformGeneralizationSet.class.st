@@ -135,7 +135,7 @@ OntoUMLTransformGeneralizationSet >> createCompositionEndFor: aComposition withE
 		name: '';
 		lowerValue: (OPUMLLiteralInteger new value: 1);
 		upperValue: (OPUMLLiteralInteger new value: 1);
-		association: aComposition;
+		owningAssociation: aComposition;
 		type: aEndType.
 	aBoolean ifTrue: [ end owningClass: aOpposingEndType. ].
 	^ end.

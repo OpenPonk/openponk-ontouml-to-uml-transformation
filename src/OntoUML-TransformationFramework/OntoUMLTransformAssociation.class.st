@@ -12,7 +12,7 @@ OntoUMLTransformAssociation >> createAssociation [
 		isDerived: transformed isDerived.
 	self tranformAssociationEnd: transformed memberEnds first forAssociation: association.
 	self tranformAssociationEnd: transformed memberEnds second forAssociation: association.
-	association memberEnds addAll: association ownedEnds.
+	association memberEnds addAll: association ownedEnds asArray.
 	^ association.
 ]
 
@@ -23,7 +23,7 @@ OntoUMLTransformAssociation >> tranformAssociationEnd: aAssociationEnd forAssoci
 		lowerValue: aAssociationEnd lowerValue;
 		upperValue: aAssociationEnd upperValue;
 		type: (controller getTransfomedElementFrom: aAssociationEnd type);
-		association: aAssociation;
+		owningAssociation: aAssociation;
 		owningClass: (aAssociationEnd owningClass ifNotNil: [controller getTransfomedElementFrom: aAssociationEnd owningClass]); "isNavigable"
 		isStatic: aAssociationEnd isStatic;
 		isReadOnly: aAssociationEnd isReadOnly;
