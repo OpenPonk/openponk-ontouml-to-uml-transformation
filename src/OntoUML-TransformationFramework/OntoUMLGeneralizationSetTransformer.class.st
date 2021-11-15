@@ -62,8 +62,9 @@ OntoUMLGeneralizationSetTransformer >> name: anObject [
 
 { #category : #transforming }
 OntoUMLGeneralizationSetTransformer >> transform [
+	transformed generalizations ifEmpty: [ ^{}. ].
 	(OntoUMLModelQuery isStereotypeOf: transformed generalizations first general oclKindOf: 'Sortal') 
-		ifTrue: [ ^ self transformSortalGenSet.]
+		ifTrue: [ ^ self transformSortalGenSet. ]
 		ifFalse: [ ^ self transformNonSortalGenSet. ].
 ]
 
