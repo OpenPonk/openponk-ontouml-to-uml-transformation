@@ -80,7 +80,7 @@ OntoUMLTransformationController >> tranformGeneralizationSets [
 { #category : #'private - transforming' }
 OntoUMLTransformationController >> tranformGeneralizations [
 	| generalizations | 
-	generalizations := OntoUMLModelQuery getGeneralizationsFrom: originalModel.
+	generalizations := OntoUMLModelQuery getGeneralizationsWithoutGenSetsFrom: originalModel.
 	generalizations ifNil: [ ^ self. ].
 	generalizations do: [ :generalization | OntoUMLGeneralizationTransformer transform: generalization withController: self. ].
 ]
