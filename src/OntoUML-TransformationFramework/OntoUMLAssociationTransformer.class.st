@@ -24,5 +24,6 @@ OntoUMLAssociationTransformer class >> initializeTransformationIndex [
 
 { #category : #transforming }
 OntoUMLAssociationTransformer >> transform [
+	transformed  memberEnds first type = transformed memberEnds second type ifTrue: [ ^nil. ].
 	^ (self class getTransformation: transformed) transform: transformed withController: controller withTransformer: self.
 ]
