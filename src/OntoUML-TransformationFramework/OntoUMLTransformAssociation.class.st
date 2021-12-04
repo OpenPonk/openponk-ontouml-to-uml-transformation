@@ -12,6 +12,7 @@ OntoUMLTransformAssociation >> createAssociation [
 		isDerived: transformed isDerived.
 	self tranformAssociationEnd: transformed memberEnds first forAssociation: association.
 	self tranformAssociationEnd: transformed memberEnds second forAssociation: association.
+	self copyCommentsFrom: transformed to: association. 
 	association memberEnds addAll: association ownedEnds asArray.
 	^ association.
 ]

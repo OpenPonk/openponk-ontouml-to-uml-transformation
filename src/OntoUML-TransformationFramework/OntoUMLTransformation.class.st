@@ -40,6 +40,16 @@ OntoUMLTransformation >> controller: anObject [
 ]
 
 { #category : #transforming }
+OntoUMLTransformation >> copyCommentFrom: aComment [
+	^ OPUMLComment new body: aComment body; yourself.
+]
+
+{ #category : #transforming }
+OntoUMLTransformation >> copyCommentsFrom: aOriginalElement to: aTransformedElement [
+	aTransformedElement ownedComments: (aOriginalElement ownedComments collect: [ :comment | self copyCommentFrom: comment. ]).
+]
+
+{ #category : #transforming }
 OntoUMLTransformation >> transform [
 	^ self subclassResponsibility.
 ]

@@ -10,6 +10,7 @@ OntoUMLTransformGeneralization >> transform [
 	generalization := OPUMLGeneralization new.
 	generalization specific: (controller getTransfomedElementFrom: transformed specific).
 	generalization general: (controller getTransfomedElementFrom: transformed general).
+	self copyCommentsFrom: transformed to: generalization. 
 	controller addElementToTransformedModel: generalization.
 	^ generalization.
 ]
