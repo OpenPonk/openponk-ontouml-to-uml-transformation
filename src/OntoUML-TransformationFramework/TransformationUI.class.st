@@ -4,8 +4,15 @@ Class {
 	#category : #'OntoUML-TransformationFramework-UI'
 }
 
+{ #category : #'as yet unclassified' }
+TransformationUI class >> defaultLayout [
+]
+
 { #category : #specs }
 TransformationUI class >> defaultSpec [
+
+	self flag: 'Pharo 9- compatibility'.
+	^ self defaultLayout
 ]
 
 { #category : #specs }
@@ -29,7 +36,7 @@ TransformationUI class >> transformToUML: aModel [
 	OPProject openOnModel: (OntoUMLTransformationController transformModel: aModel).
 ]
 
-{ #category : #initialization }
-TransformationUI >> initializeWidgets [
+{ #category : #'as yet unclassified' }
+TransformationUI >> initializePresenters [
 	"We don't need to initialize anything."
 ]

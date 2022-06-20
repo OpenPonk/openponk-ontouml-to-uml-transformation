@@ -32,13 +32,20 @@ TransformGeneralizationSetUI class >> bottomLayout [
 		yourself.
 ]
 
-{ #category : #specs }
-TransformGeneralizationSetUI class >> defaultSpec [
+{ #category : #'as yet unclassified' }
+TransformGeneralizationSetUI class >> defaultLayout [
 		^ SpBoxLayout newTopToBottom
 		beNotHomogeneous;
 		add: self topLayout height: 100;
 		add: self bottomLayout expand: true;
 		yourself
+]
+
+{ #category : #specs }
+TransformGeneralizationSetUI class >> defaultSpec [
+
+	self flag: 'Pharo 9- compatibility'.
+	^ self defaultLayout
 ]
 
 { #category : #specs }
