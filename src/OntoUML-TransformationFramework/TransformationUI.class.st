@@ -9,13 +9,6 @@ TransformationUI class >> defaultLayout [
 ]
 
 { #category : #specs }
-TransformationUI class >> defaultSpec [
-
-	self flag: 'Pharo 9- compatibility'.
-	^ self defaultLayout
-]
-
-{ #category : #specs }
 TransformationUI class >> toolbarMenu: aBuilder [ 
 	<opEditorToolbarMenu: #OPUmlClassEditorPlugin>
 	| builder |

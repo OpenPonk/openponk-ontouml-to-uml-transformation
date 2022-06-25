@@ -42,13 +42,6 @@ TransformGeneralizationSetUI class >> defaultLayout [
 ]
 
 { #category : #specs }
-TransformGeneralizationSetUI class >> defaultSpec [
-
-	self flag: 'Pharo 9- compatibility'.
-	^ self defaultLayout
-]
-
-{ #category : #specs }
 TransformGeneralizationSetUI class >> open [
 	<script>
 	self new openModalWithSpec 
