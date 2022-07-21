@@ -44,7 +44,7 @@ TransformGeneralizationSetUI class >> defaultLayout [
 { #category : #specs }
 TransformGeneralizationSetUI class >> open [
 	<script>
-	self new openModalWithSpec 
+	self new openModal
 ]
 
 { #category : #specs }

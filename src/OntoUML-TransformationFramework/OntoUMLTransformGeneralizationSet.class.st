@@ -179,7 +179,7 @@ OntoUMLTransformGeneralizationSet >> getSelectionUsingModalWindow [
 	dialogWindow := TransformGeneralizationSetUI basicNew.
 	dialogWindow model: transformed.
 	dialogWindow initialize.
-	dialogWindow openModalWithSpec.
+	dialogWindow openModal.
 	dialogWindow useForAll ifTrue: [ transformer class savedTransformation: dialogWindow transformation. ].
 	^ dialogWindow transformation.
 	

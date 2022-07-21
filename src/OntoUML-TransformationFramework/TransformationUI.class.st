@@ -9,11 +9,13 @@ TransformationUI class >> defaultLayout [
 ]
 
 { #category : #specs }
-TransformationUI class >> toolbarMenu: aBuilder [ 
+TransformationUI class >> toolbarMenu: aBuilder [
+
 	<opEditorToolbarMenu: #OPUmlClassEditorPlugin>
-	| builder |
-	builder := aBuilder model diagramController model profileApplications.
-	(builder isEmpty or: [ builder anyOne appliedProfile name ~= 'OntoUML' ])
+	| appliedProfiles |
+	appliedProfiles := aBuilder model diagramController model
+		                   profileApplications collect: #appliedProfile.
+	(appliedProfiles noneSatisfy: [ :each | each name = 'OntoUML' ]) 
 		ifTrue: [ ^ self ].
 	self toolbarMenuItemFor: aBuilder
 ]
