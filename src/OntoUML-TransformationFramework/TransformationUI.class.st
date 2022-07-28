@@ -22,8 +22,11 @@ TransformationUI class >> toolbarMenu: aBuilder [
 
 { #category : #specs }
 TransformationUI class >> toolbarMenuItemFor: aBuilder [
+
 	(aBuilder item: 'Transform to UML')
-		action: [ self transformToUML: aBuilder model diagramController model ].
+		icon: OntoUMLIcons ontoumlIcon;
+		action: [ 
+			self transformToUML: aBuilder model diagramController model ]
 ]
 
 { #category : #specs }
