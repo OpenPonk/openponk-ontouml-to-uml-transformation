@@ -198,7 +198,7 @@ TransformGeneralizationSetUI >> initializeWindow: aWindow [
 
 	aWindow
 		title: self class title;
-		isResizeable: false;
+		resizable: false;
 		initialExtent: 700 @ 600.
 ]
 
