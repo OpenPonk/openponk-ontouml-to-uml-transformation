@@ -31,7 +31,10 @@ TransformationUI class >> toolbarMenuItemFor: aBuilder [
 
 { #category : #specs }
 TransformationUI class >> transformToUML: aModel [
-	OPProject openOnModel: (OntoUMLTransformationController transformModel: aModel).
+
+	(OPProject openOnModel:
+		 (OntoUMLTransformationController transformModel: aModel))
+		showAllElementsInAllDiagrams
 ]
 
 { #category : #'as yet unclassified' }
