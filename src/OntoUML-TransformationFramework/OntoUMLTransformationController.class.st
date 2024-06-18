@@ -1,15 +1,17 @@
 Class {
-	#name : #OntoUMLTransformationController,
-	#superclass : #Object,
+	#name : 'OntoUMLTransformationController',
+	#superclass : 'Object',
 	#instVars : [
 		'originalModel',
 		'transformedModel',
 		'transformedElements'
 	],
-	#category : #'OntoUML-TransformationFramework-Controllers'
+	#category : 'OntoUML-TransformationFramework-Controllers',
+	#package : 'OntoUML-TransformationFramework',
+	#tag : 'Controllers'
 }
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformationController class >> transformModel: aModel [
 	| instance |
 	instance := self new.
@@ -17,57 +19,57 @@ OntoUMLTransformationController class >> transformModel: aModel [
 	^ instance transform.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OntoUMLTransformationController >> addElementToTransformedModel: aElement [
 	transformedModel packagedElements add: aElement.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OntoUMLTransformationController >> addTranformationLinkBetween: aOriginalElement and: aTransformedElement [
 	transformedElements add: (aOriginalElement -> aTransformedElement).
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OntoUMLTransformationController >> getTransfomedElementFrom: aOriginalElement [
 	^ transformedElements at: aOriginalElement.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 OntoUMLTransformationController >> initialize [
 	self initializeTransformedModel.
 	transformedElements := Dictionary new.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 OntoUMLTransformationController >> initializeTransformedModel [
 	transformedModel := OPUMLPackage new name: 'UML Model'.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OntoUMLTransformationController >> originalModel [
 
 	^ originalModel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OntoUMLTransformationController >> originalModel: anObject [
 
 	originalModel := anObject
 ]
 
-{ #category : #'private - transforming' }
+{ #category : 'private - transforming' }
 OntoUMLTransformationController >> tranformAssociations [
 	(OntoUMLModelQuery getAssociationsFrom: originalModel)
 		do: [ :association | OntoUMLAssociationTransformer transform: association withController: self. ].
 ]
 
-{ #category : #'private - transforming' }
+{ #category : 'private - transforming' }
 OntoUMLTransformationController >> tranformClasses [
 	(OntoUMLModelQuery getEntitiesFrom: originalModel)
 		do: [ :entity | OntoUMLClassTransformer transform: entity withController: self. ].
 ]
 
-{ #category : #'private - transforming' }
+{ #category : 'private - transforming' }
 OntoUMLTransformationController >> tranformGeneralizationSets [
 	| genSets | 
 	genSets := OntoUMLModelQuery getGeneralizationSetsFrom: originalModel.
@@ -77,7 +79,7 @@ OntoUMLTransformationController >> tranformGeneralizationSets [
 	
 ]
 
-{ #category : #'private - transforming' }
+{ #category : 'private - transforming' }
 OntoUMLTransformationController >> tranformGeneralizations [
 	| generalizations | 
 	generalizations := OntoUMLModelQuery getGeneralizationsWithoutGenSetsFrom: originalModel.
@@ -85,19 +87,19 @@ OntoUMLTransformationController >> tranformGeneralizations [
 	generalizations do: [ :generalization | OntoUMLGeneralizationTransformer transform: generalization withController: self. ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OntoUMLTransformationController >> transfomedElements [
 
 	^ transformedElements
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OntoUMLTransformationController >> transfomedElements: anObject [
 
 	transformedElements := anObject
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformationController >> transform [
 	self tranformClasses.
 	self tranformAssociations.
@@ -106,13 +108,13 @@ OntoUMLTransformationController >> transform [
 	^ transformedModel.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OntoUMLTransformationController >> transformedModel [
 
 	^ transformedModel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OntoUMLTransformationController >> transformedModel: anObject [
 
 	transformedModel := anObject

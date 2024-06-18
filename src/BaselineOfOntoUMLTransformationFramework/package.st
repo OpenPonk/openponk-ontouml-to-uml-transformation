@@ -1,1 +1,1 @@
-Package { #name : #BaselineOfOntoUMLTransformationFramework }
+Package { #name : 'BaselineOfOntoUMLTransformationFramework' }

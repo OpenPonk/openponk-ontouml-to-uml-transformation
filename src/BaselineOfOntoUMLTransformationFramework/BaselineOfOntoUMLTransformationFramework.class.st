@@ -1,10 +1,11 @@
 Class {
-	#name : #BaselineOfOntoUMLTransformationFramework,
-	#superclass : #BaselineOf,
-	#category : #BaselineOfOntoUMLTransformationFramework
+	#name : 'BaselineOfOntoUMLTransformationFramework',
+	#superclass : 'BaselineOf',
+	#category : 'BaselineOfOntoUMLTransformationFramework',
+	#package : 'BaselineOfOntoUMLTransformationFramework'
 }
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfOntoUMLTransformationFramework >> baseline: spec [
 	<baseline>
 	spec

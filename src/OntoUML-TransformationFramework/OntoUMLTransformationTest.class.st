@@ -1,10 +1,12 @@
 Class {
-	#name : #OntoUMLTransformationTest,
-	#superclass : #TestCase,
-	#category : #'OntoUML-TransformationFramework-Transformations'
+	#name : 'OntoUMLTransformationTest',
+	#superclass : 'TestCase',
+	#category : 'OntoUML-TransformationFramework-Transformations',
+	#package : 'OntoUML-TransformationFramework',
+	#tag : 'Transformations'
 }
 
-{ #category : #utility }
+{ #category : 'utility' }
 OntoUMLTransformationTest >> createAssociationFrom: aSource to: aEnd [
 	| association |
 	association := OPUMLAssociation new.
@@ -24,7 +26,7 @@ OntoUMLTransformationTest >> createAssociationFrom: aSource to: aEnd [
 	^ association
 ]
 
-{ #category : #utility }
+{ #category : 'utility' }
 OntoUMLTransformationTest >> createAssociationFrom: aSource to: aEnd with: aStereotype [ 
 	| association |
 	association := self createAssociationFrom: aSource to: aEnd.
@@ -32,12 +34,12 @@ OntoUMLTransformationTest >> createAssociationFrom: aSource to: aEnd with: aSter
 	^ association.
 ]
 
-{ #category : #constants }
+{ #category : 'constants' }
 OntoUMLTransformationTest >> getTestedClass [
 	^ OntoUMLTransformation.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OntoUMLTransformationTest >> testController [
 	| tested controller alternativeController | 
 	tested := self getTestedClass new.
@@ -50,7 +52,7 @@ OntoUMLTransformationTest >> testController [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OntoUMLTransformationTest >> testNewWithTransformedWithControllerWithTransformer [
 	| testedClass testedInstance controller transformed transformer |
 	testedClass :=  self getTestedClass.
@@ -64,7 +66,7 @@ OntoUMLTransformationTest >> testNewWithTransformedWithControllerWithTransformer
 	self assert: testedInstance transformed equals: transformed. 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OntoUMLTransformationTest >> testTransformed [
 	| tested transformed alternativeTransformed | 
 	tested := self getTestedClass new.
@@ -77,7 +79,7 @@ OntoUMLTransformationTest >> testTransformed [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OntoUMLTransformationTest >> testTransformer [
 	| tested transformer alternativeTransformer | 
 	tested := OntoUMLTransformation new.

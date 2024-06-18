@@ -1,43 +1,45 @@
 Class {
-	#name : #OntoUMLTransformGeneralizationSet,
-	#superclass : #OntoUMLTransformation,
+	#name : 'OntoUMLTransformGeneralizationSet',
+	#superclass : 'OntoUMLTransformation',
 	#instVars : [
 		'elements',
 		'index',
 		'combinationSelector'
 	],
-	#category : #'OntoUML-TransformationFramework-Transformations'
+	#category : 'OntoUML-TransformationFramework-Transformations',
+	#package : 'OntoUML-TransformationFramework',
+	#tag : 'Transformations'
 }
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformGeneralizationSet class >> transformAsComposition: aTransformed withController: aController withTransformer: aTransformer [
 	| instance |
 	instance := self newWithTransformed: aTransformed withController: aController withTransformer: aTransformer.
 	^ instance transformAsComposition.
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformGeneralizationSet class >> transformAsGeneralization: aTransformed withController: aController withTransformer: aTransformer [
 	| instance |
 	instance := self newWithTransformed: aTransformed withController: aController withTransformer: aTransformer.
 	^ instance transformAsGeneralization.
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformGeneralizationSet class >> transformAsGeneralizationAndComposition: aTransformed withController: aController withTransformer: aTransformer [
 	| instance |
 	instance := self newWithTransformed: aTransformed withController: aController withTransformer: aTransformer.
 	^ instance transformAsGeneralizationAndComposition.
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformGeneralizationSet class >> transformWithoutCombination: aTransformed withController: aController withTransformer: aTransformer [
 	| instance |
 	instance := self newWithTransformed: aTransformed withController: aController withTransformer: aTransformer.
 	^ instance transformDisjointGeneralization.
 ]
 
-{ #category : #'private - transforming - generalization' }
+{ #category : 'private - transforming - generalization' }
 OntoUMLTransformGeneralizationSet >> calculateIndex: aIndex for: aElementPosition [
 	| positionOffset |
 	positionOffset := 2 raisedTo: (aElementPosition - 1).
@@ -46,7 +48,7 @@ OntoUMLTransformGeneralizationSet >> calculateIndex: aIndex for: aElementPositio
 		ifFalse: [ ^ 0. ].
 ]
 
-{ #category : #'private - transforming - generalization' }
+{ #category : 'private - transforming - generalization' }
 OntoUMLTransformGeneralizationSet >> calculateIndexesFrom: aIndex [
 	| sumOfIndexes |
 	sumOfIndexes := 0.
@@ -56,25 +58,25 @@ OntoUMLTransformGeneralizationSet >> calculateIndexesFrom: aIndex [
 	^ sumOfIndexes.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OntoUMLTransformGeneralizationSet >> combinationSelector [
 
 	^ combinationSelector
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OntoUMLTransformGeneralizationSet >> combinationSelector: anObject [
 
 	combinationSelector := anObject
 ]
 
-{ #category : #'private - transforming - generalization' }
+{ #category : 'private - transforming - generalization' }
 OntoUMLTransformGeneralizationSet >> combineClass: aAddedClass with: aCompositeClass [
 	^ self combinationSelector value: aAddedClass value: aCompositeClass.
 	
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformGeneralizationSet >> combineUsingGeneralization: aAddedClass with: aCompositeClass [
 	aCompositeClass name: aCompositeClass name, aAddedClass name.
 	self copyAttributesFrom: aAddedClass in: aCompositeClass.
@@ -82,14 +84,14 @@ OntoUMLTransformGeneralizationSet >> combineUsingGeneralization: aAddedClass wit
 	^ {}.
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformGeneralizationSet >> combineUsingGeneralizationAndComposition: aAddedClass with: aCompositeClass [
 	aCompositeClass name: aCompositeClass name, aAddedClass name.
 	^ { self createCompositionWithSource: (controller getTransfomedElementFrom: aAddedClass) withTarget: aCompositeClass. }.
 	
 ]
 
-{ #category : #'private - transforming - generalization' }
+{ #category : 'private - transforming - generalization' }
 OntoUMLTransformGeneralizationSet >> copyAttribute: aAttribute for: aClass [
 	| copy |
 	aAttribute association ifNotNil: [ ^ {}. ].
@@ -99,7 +101,7 @@ OntoUMLTransformGeneralizationSet >> copyAttribute: aAttribute for: aClass [
 	aClass ownedAttributes add: copy.
 ]
 
-{ #category : #'private - transforming - generalization' }
+{ #category : 'private - transforming - generalization' }
 OntoUMLTransformGeneralizationSet >> copyAttributesFrom: aAddedClass in: aCompositeClass [
 	| attributes |
 	attributes := aAddedClass ownedAttributes.
@@ -107,12 +109,12 @@ OntoUMLTransformGeneralizationSet >> copyAttributesFrom: aAddedClass in: aCompos
 	attributes do: [ :attribute | self copyAttribute: attribute for: aCompositeClass. ].
 ]
 
-{ #category : #'private - transforming - generalization' }
+{ #category : 'private - transforming - generalization' }
 OntoUMLTransformGeneralizationSet >> copyOperationsFor: aCompositeClass [	
 	aCompositeClass ownedOperations addAll: (aCompositeClass ownedAttributes select: [ :att | att isKindOf: OPUMLOperation ]).
 ]
 
-{ #category : #'private - transforming - generalization' }
+{ #category : 'private - transforming - generalization' }
 OntoUMLTransformGeneralizationSet >> createClassCombination [
 	| newClass results |
 	results := OrderedCollection new.
@@ -128,7 +130,7 @@ OntoUMLTransformGeneralizationSet >> createClassCombination [
 	^ results.
 ]
 
-{ #category : #'private - transforming - composition' }
+{ #category : 'private - transforming - composition' }
 OntoUMLTransformGeneralizationSet >> createCompositionEndFor: aComposition withEndType: aEndType withOpposingEnd: aOpposingEndType navigable: aBoolean [
 	| end |
 	end := OPUMLProperty new
@@ -141,7 +143,7 @@ OntoUMLTransformGeneralizationSet >> createCompositionEndFor: aComposition withE
 	^ end.
 ]
 
-{ #category : #'private - transforming - composition' }
+{ #category : 'private - transforming - composition' }
 OntoUMLTransformGeneralizationSet >> createCompositionWithSource: aSource withTarget: aTarget [
 	| composition |
 	composition := OPUMLAssociation new.
@@ -151,12 +153,12 @@ OntoUMLTransformGeneralizationSet >> createCompositionWithSource: aSource withTa
 	^ composition.
 ]
 
-{ #category : #'private - transforming - generalization' }
+{ #category : 'private - transforming - generalization' }
 OntoUMLTransformGeneralizationSet >> createGeneralizationFor: aSpecific [
 	^ self createGeneralizationWithGeneral: (controller getTransfomedElementFrom: transformed first general) withSpecific: aSpecific.
 ]
 
-{ #category : #'private - transforming - generalization' }
+{ #category : 'private - transforming - generalization' }
 OntoUMLTransformGeneralizationSet >> createGeneralizationWithGeneral: aGeneral withSpecific: aSpecific [
 	| generalization |
 	generalization := OPUMLGeneralization new.
@@ -165,7 +167,7 @@ OntoUMLTransformGeneralizationSet >> createGeneralizationWithGeneral: aGeneral w
 	^ generalization.
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformGeneralizationSet >> getSelection [
 	| transformation |
 	transformation := transformer class savedTransformation.
@@ -173,7 +175,7 @@ OntoUMLTransformGeneralizationSet >> getSelection [
 	
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformGeneralizationSet >> getSelectionUsingModalWindow [
 	| dialogWindow |
 	dialogWindow := TransformGeneralizationSetUI basicNew.
@@ -185,25 +187,25 @@ OntoUMLTransformGeneralizationSet >> getSelectionUsingModalWindow [
 	
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 OntoUMLTransformGeneralizationSet >> initializeArrays [
 	elements := (transformed collect: [ :generalization | generalization specific. ]) asArray.
 	index := Array new: elements size.
 ]
 
-{ #category : #'private - transforming - generalization' }
+{ #category : 'private - transforming - generalization' }
 OntoUMLTransformGeneralizationSet >> setGeneralProperties [
 	transformer transformed isDisjoint ifTrue: [ self setName. ].
 	transformer transformed isCovering ifTrue: [ transformer general isAbstract: true. ].
 ]
 
-{ #category : #'private - transforming - composition' }
+{ #category : 'private - transforming - composition' }
 OntoUMLTransformGeneralizationSet >> setName [
 	((transformer name ifNil: [ '' ]) endsWith: 'XOR') ifTrue: [ ^ self. ].
 	transformer name: (transformer transformed name ifNil: [ transformer general name ]) , ' - XOR'.
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformGeneralizationSet >> transform [
 	| selection |	
  	transformer transformed isDisjoint ifTrue: [ ^ self transformDisjointGeneralization. ].
@@ -214,36 +216,36 @@ OntoUMLTransformGeneralizationSet >> transform [
 	^ nil.
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformGeneralizationSet >> transformAsComposition [
 	transformer transformed isDisjoint ifTrue: [ self setName. ].
 	^ transformed collect: [ :generalization | OntoUMLTransformComposition transform: generalization withController: controller withTransformer: transformer. ].
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformGeneralizationSet >> transformAsGeneralization [
 	^ self transformWithCombination: [ :addedClass :composedClass | self combineUsingGeneralization: addedClass with: composedClass. ].
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformGeneralizationSet >> transformAsGeneralizationAndComposition [
 	^ self transformWithCombination: [ :addedClass :composedClass | self combineUsingGeneralizationAndComposition: addedClass with: composedClass. ].
 ]
 
-{ #category : #'private - transforming - generalization' }
+{ #category : 'private - transforming - generalization' }
 OntoUMLTransformGeneralizationSet >> transformClassCombination: aIndex [
 	(self calculateIndexesFrom: aIndex) < 2 ifTrue:
 	 [ ^ {}. ].
 	^ self createClassCombination.
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformGeneralizationSet >> transformDisjointGeneralization [
 	self initializeArrays.
 	^ elements collect: [ :element | self createGeneralizationFor: (controller getTransfomedElementFrom: element). ].
 ]
 
-{ #category : #'private - transforming - generalization' }
+{ #category : 'private - transforming - generalization' }
 OntoUMLTransformGeneralizationSet >> transformWithCombination: aCombinationSelector [
 	| maxIndex results |
 	self setGeneralProperties.

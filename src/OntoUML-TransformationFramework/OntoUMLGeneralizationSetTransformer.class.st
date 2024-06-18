@@ -1,6 +1,6 @@
 Class {
-	#name : #OntoUMLGeneralizationSetTransformer,
-	#superclass : #OntoUMLTransformer,
+	#name : 'OntoUMLGeneralizationSetTransformer',
+	#superclass : 'OntoUMLTransformer',
 	#instVars : [
 		'generalizations',
 		'name'
@@ -8,21 +8,23 @@ Class {
 	#classInstVars : [
 		'savedTransformation'
 	],
-	#category : #'OntoUML-TransformationFramework-Transformers'
+	#category : 'OntoUML-TransformationFramework-Transformers',
+	#package : 'OntoUML-TransformationFramework',
+	#tag : 'Transformers'
 }
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLGeneralizationSetTransformer class >> defaultTransformation [
 	^ [ :generalizations :controller :transformer | OntoUMLTransformGeneralizationSet transform: generalizations withController: controller withTransformer: transformer. ].
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLGeneralizationSetTransformer class >> generalizationSetGroups [
 	"Order of elements in collection determines order of the transformation"
 	^ { 'Phase'. 'Role'. 'RoleMixin'. 'Mixin'. 'Object'. "Object = all remaining GenSet groups" }.
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLGeneralizationSetTransformer class >> initializeTransformationIndex [
 	transformationIndex  := Dictionary new.
 	transformationIndex add: ('Phase' -> [ :generalizations :controller :transformer | OntoUMLTransformGeneralizationSet transformAsComposition: generalizations withController: controller withTransformer: transformer. ]).
@@ -31,36 +33,36 @@ OntoUMLGeneralizationSetTransformer class >> initializeTransformationIndex [
 	transformationIndex add: ('Mixin' -> [ :generalizations :controller :transformer | OntoUMLTransformGeneralizationSet transformAsComposition: generalizations withController: controller withTransformer: transformer. ]).
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OntoUMLGeneralizationSetTransformer class >> savedTransformation [
 
 	^ savedTransformation
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OntoUMLGeneralizationSetTransformer class >> savedTransformation: anObject [
 
 	savedTransformation := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OntoUMLGeneralizationSetTransformer >> general [
 	^ controller getTransfomedElementFrom: transformed generalizations first general.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OntoUMLGeneralizationSetTransformer >> name [
 
 	^ name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OntoUMLGeneralizationSetTransformer >> name: anObject [
 
 	name := anObject
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLGeneralizationSetTransformer >> transform [
 	transformed generalizations ifEmpty: [ ^{}. ].
 	(OntoUMLModelQuery isStereotypeOf: transformed generalizations first general oclKindOf: 'Sortal') 
@@ -68,7 +70,7 @@ OntoUMLGeneralizationSetTransformer >> transform [
 		ifFalse: [ ^ self transformNonSortalGenSet. ].
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLGeneralizationSetTransformer >> transformGroup: aGroup [
 	| transformedGeneralizations transformation result |
 	transformedGeneralizations := generalizations select: [ :generalization | OntoUMLModelQuery isStereotypeOf: generalization specific oclKindOf: aGroup. ].
@@ -79,14 +81,14 @@ OntoUMLGeneralizationSetTransformer >> transformGroup: aGroup [
 	^ result.
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLGeneralizationSetTransformer >> transformNonSortalGenSet [ 
 	generalizations := OrderedCollection new.
 	generalizations addAll: transformed generalizations.
 	^ OntoUMLTransformGeneralizationSet transformWithoutCombination: generalizations withController: controller withTransformer: self.
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLGeneralizationSetTransformer >> transformSortalGenSet [
 	generalizations := OrderedCollection new.
 	generalizations addAll: transformed generalizations.

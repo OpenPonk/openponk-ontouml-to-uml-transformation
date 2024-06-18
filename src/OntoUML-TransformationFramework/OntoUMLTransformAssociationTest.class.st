@@ -1,10 +1,12 @@
 Class {
-	#name : #OntoUMLTransformAssociationTest,
-	#superclass : #OntoUMLTransformationTest,
-	#category : #'OntoUML-TransformationFramework-Transformations'
+	#name : 'OntoUMLTransformAssociationTest',
+	#superclass : 'OntoUMLTransformationTest',
+	#category : 'OntoUML-TransformationFramework-Transformations',
+	#package : 'OntoUML-TransformationFramework',
+	#tag : 'Transformations'
 }
 
-{ #category : #constants }
+{ #category : 'constants' }
 OntoUMLTransformAssociationTest >> getAssociation [
 	| source target association |
 	source := OPUMLClass new name: 'source'.

@@ -1,14 +1,16 @@
 Class {
-	#name : #TransformationUI,
-	#superclass : #SpPresenter,
-	#category : #'OntoUML-TransformationFramework-UI'
+	#name : 'TransformationUI',
+	#superclass : 'SpPresenter',
+	#category : 'OntoUML-TransformationFramework-UI',
+	#package : 'OntoUML-TransformationFramework',
+	#tag : 'UI'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 TransformationUI class >> defaultLayout [
 ]
 
-{ #category : #specs }
+{ #category : 'specs' }
 TransformationUI class >> toolbarMenu: aBuilder [
 
 	<opEditorToolbarMenu: #OPUmlClassEditorPlugin>
@@ -20,7 +22,7 @@ TransformationUI class >> toolbarMenu: aBuilder [
 	self toolbarMenuItemFor: aBuilder
 ]
 
-{ #category : #specs }
+{ #category : 'specs' }
 TransformationUI class >> toolbarMenuItemFor: aBuilder [
 
 	(aBuilder item: 'Transform to UML')
@@ -29,7 +31,7 @@ TransformationUI class >> toolbarMenuItemFor: aBuilder [
 			self transformToUML: aBuilder model diagramController model ]
 ]
 
-{ #category : #specs }
+{ #category : 'specs' }
 TransformationUI class >> transformToUML: aModel [
 
 	(OPProject openOnModel:
@@ -37,7 +39,7 @@ TransformationUI class >> transformToUML: aModel [
 		showAllElementsInAllDiagrams
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 TransformationUI >> initializePresenters [
 	"We don't need to initialize anything."
 ]

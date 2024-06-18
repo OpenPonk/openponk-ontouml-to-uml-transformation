@@ -1,1 +1,1 @@
-Package { #name : #'OntoUML-TransformationFramework' }
+Package { #name : 'OntoUML-TransformationFramework' }

@@ -1,6 +1,6 @@
 Class {
-	#name : #OntoUMLTransformer,
-	#superclass : #Object,
+	#name : 'OntoUMLTransformer',
+	#superclass : 'Object',
 	#instVars : [
 		'transformed',
 		'controller'
@@ -8,26 +8,28 @@ Class {
 	#classInstVars : [
 		'transformationIndex'
 	],
-	#category : #'OntoUML-TransformationFramework-Transformers'
+	#category : 'OntoUML-TransformationFramework-Transformers',
+	#package : 'OntoUML-TransformationFramework',
+	#tag : 'Transformers'
 }
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformer class >> defaultTransformation [
 	^ self subclassResponsibility.
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformer class >> getTransformation: aSelector [
 	transformationIndex ifNil: [ self initializeTransformationIndex ].
 	^ transformationIndex at: aSelector ifAbsent: [ self defaultTransformation. ].
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformer class >> initializeTransformationIndex [
 	^self subclassResponsibility.
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformer class >> transform: aTransformed withController: aController [
  	| instance |
 	instance := self new.
@@ -36,29 +38,29 @@ OntoUMLTransformer class >> transform: aTransformed withController: aController 
 	^ instance transform.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OntoUMLTransformer >> controller [
 	^ controller
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OntoUMLTransformer >> controller: anObject [
 
 	controller := anObject
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformer >> transform [ 
 	^ self subclassResponsibility.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OntoUMLTransformer >> transformed [
 
 	^ transformed
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OntoUMLTransformer >> transformed: anObject [
 
 	transformed := anObject

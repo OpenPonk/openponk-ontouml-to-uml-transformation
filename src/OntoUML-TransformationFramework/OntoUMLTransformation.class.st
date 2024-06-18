@@ -1,15 +1,17 @@
 Class {
-	#name : #OntoUMLTransformation,
-	#superclass : #Object,
+	#name : 'OntoUMLTransformation',
+	#superclass : 'Object',
 	#instVars : [
 		'transformed',
 		'controller',
 		'transformer'
 	],
-	#category : #'OntoUML-TransformationFramework-Transformations'
+	#category : 'OntoUML-TransformationFramework-Transformations',
+	#package : 'OntoUML-TransformationFramework',
+	#tag : 'Transformations'
 }
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformation class >> newWithTransformed: aTransformed withController: aController withTransformer: aTransformer [
 	| instance |
 	instance := self new.
@@ -19,7 +21,7 @@ OntoUMLTransformation class >> newWithTransformed: aTransformed withController: 
 	^ instance.
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformation class >> transform: aTransformed withController: aController withTransformer: aTransformer [
 	^ (self newWithTransformed: aTransformed 
 			withController: aController 
@@ -27,52 +29,52 @@ OntoUMLTransformation class >> transform: aTransformed withController: aControll
 					transform.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OntoUMLTransformation >> controller [
 
 	^ controller
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OntoUMLTransformation >> controller: anObject [
 
 	controller := anObject
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformation >> copyCommentFrom: aComment [
 	^ OPUMLComment new body: aComment body; yourself.
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformation >> copyCommentsFrom: aOriginalElement to: aTransformedElement [
 	aTransformedElement ownedComments: (aOriginalElement ownedComments collect: [ :comment | self copyCommentFrom: comment. ]).
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformation >> transform [
 	^ self subclassResponsibility.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OntoUMLTransformation >> transformed [
 
 	^ transformed
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OntoUMLTransformation >> transformed: anObject [
 
 	transformed := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OntoUMLTransformation >> transformer [
 
 	^ transformer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OntoUMLTransformation >> transformer: anObject [
 
 	transformer := anObject

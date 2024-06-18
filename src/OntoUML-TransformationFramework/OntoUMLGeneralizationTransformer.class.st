@@ -1,22 +1,24 @@
 Class {
-	#name : #OntoUMLGeneralizationTransformer,
-	#superclass : #OntoUMLTransformer,
-	#category : #'OntoUML-TransformationFramework-Transformers'
+	#name : 'OntoUMLGeneralizationTransformer',
+	#superclass : 'OntoUMLTransformer',
+	#category : 'OntoUML-TransformationFramework-Transformers',
+	#package : 'OntoUML-TransformationFramework',
+	#tag : 'Transformers'
 }
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLGeneralizationTransformer class >> defaultTransformation [
 	^ OntoUMLTransformGeneralization.
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLGeneralizationTransformer class >> getTransformation: aClass [
 	| stereotypeClass |
 	stereotypeClass := OntoUMLModelQuery getStereotypeClass: aClass.
 	^ super getTransformation: stereotypeClass.
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLGeneralizationTransformer class >> initializeTransformationIndex [
 	transformationIndex := Dictionary new.
 	transformationIndex add: (OntoUMLPhase -> OntoUMLTransformComposition).
@@ -26,12 +28,12 @@ OntoUMLGeneralizationTransformer class >> initializeTransformationIndex [
 	
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLGeneralizationTransformer >> name [
 	^ ''.
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLGeneralizationTransformer >> transform [ 
 	^ (self class getTransformation: transformed specific) transform: transformed withController: controller withTransformer: self.
 ]

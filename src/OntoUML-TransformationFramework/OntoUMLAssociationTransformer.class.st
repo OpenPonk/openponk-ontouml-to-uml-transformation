@@ -1,28 +1,30 @@
 Class {
-	#name : #OntoUMLAssociationTransformer,
-	#superclass : #OntoUMLTransformer,
-	#category : #'OntoUML-TransformationFramework-Transformers'
+	#name : 'OntoUMLAssociationTransformer',
+	#superclass : 'OntoUMLTransformer',
+	#category : 'OntoUML-TransformationFramework-Transformers',
+	#package : 'OntoUML-TransformationFramework',
+	#tag : 'Transformers'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OntoUMLAssociationTransformer class >> defaultTransformation [
 	^ OntoUMLTransformAssociation.
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLAssociationTransformer class >> getTransformation: aAssocitaion [
 	| stereotypeClass |
 	stereotypeClass := OntoUMLModelQuery getStereotypeClass: aAssocitaion.
 	^ super getTransformation: stereotypeClass.
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLAssociationTransformer class >> initializeTransformationIndex [
 	transformationIndex := Dictionary new.
 	transformationIndex add: (OntoUMLSubQuantityOf -> OntoUMLTransformSubQuantityOf).
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLAssociationTransformer >> transform [
 	transformed  memberEnds first type = transformed memberEnds second type ifTrue: [ ^nil. ].
 	^ (self class getTransformation: transformed) transform: transformed withController: controller withTransformer: self.

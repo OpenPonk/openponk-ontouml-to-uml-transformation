@@ -1,17 +1,19 @@
 Class {
-	#name : #OntoUMLTransformClass,
-	#superclass : #OntoUMLTransformation,
-	#category : #'OntoUML-TransformationFramework-Transformations'
+	#name : 'OntoUMLTransformClass',
+	#superclass : 'OntoUMLTransformation',
+	#category : 'OntoUML-TransformationFramework-Transformations',
+	#package : 'OntoUML-TransformationFramework',
+	#tag : 'Transformations'
 }
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformClass >> copyAttribute: aAttribute for: aEntity [
 	(aAttribute isKindOf: OPUMLProperty) ifTrue: [ ^ self copyProperty: aAttribute for: aEntity. ].
 	(aAttribute isKindOf: OPUMLOperation) ifTrue: [ ^ self copyOperation: aAttribute for: aEntity. ].
 	^ {}.
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformClass >> copyAttributes: aAttributesCollection for: aEntity [
 	| copy |
 	copy := aAttributesCollection copyEmpty.
@@ -19,7 +21,7 @@ OntoUMLTransformClass >> copyAttributes: aAttributesCollection for: aEntity [
 	^ copy.
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformClass >> copyMultiplicity: aMultiplicity [
 	| copy |	
 	aMultiplicity ifNil: [ ^ nil. ].
@@ -29,7 +31,7 @@ OntoUMLTransformClass >> copyMultiplicity: aMultiplicity [
 	^ copy
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformClass >> copyOperation: aOperation for: aEntity [
 	| copy |
 	copy := OPUMLOperation new.
@@ -42,7 +44,7 @@ OntoUMLTransformClass >> copyOperation: aOperation for: aEntity [
 	^ { copy. }.
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformClass >> copyProperty: aProperty for: aEntity [
 	| copy |
 	aProperty association ifNotNil: [ ^ {}. ].
@@ -61,7 +63,7 @@ OntoUMLTransformClass >> copyProperty: aProperty for: aEntity [
 	^ { copy. }
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformClass >> createClassFor: aEntity [
 	| createdClass |
 	createdClass := OPUMLClass new.	
@@ -72,7 +74,7 @@ OntoUMLTransformClass >> createClassFor: aEntity [
 	^ createdClass.
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformClass >> transform [
 	| entityClass |
 	entityClass := self createClassFor: transformed.

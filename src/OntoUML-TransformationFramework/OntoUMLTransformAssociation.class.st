@@ -1,10 +1,12 @@
 Class {
-	#name : #OntoUMLTransformAssociation,
-	#superclass : #OntoUMLTransformation,
-	#category : #'OntoUML-TransformationFramework-Transformations'
+	#name : 'OntoUMLTransformAssociation',
+	#superclass : 'OntoUMLTransformation',
+	#category : 'OntoUML-TransformationFramework-Transformations',
+	#package : 'OntoUML-TransformationFramework',
+	#tag : 'Transformations'
 }
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformAssociation >> createAssociation [
 	| association |
 	association := OPUMLAssociation new.	
@@ -17,7 +19,7 @@ OntoUMLTransformAssociation >> createAssociation [
 	^ association.
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformAssociation >> tranformAssociationEnd: aAssociationEnd forAssociation: aAssociation [
 	^ OPUMLProperty new
 		name: aAssociationEnd name;
@@ -36,7 +38,7 @@ OntoUMLTransformAssociation >> tranformAssociationEnd: aAssociationEnd forAssoci
 		
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformAssociation >> transform [
 	| association |
 	association := self createAssociation.

@@ -1,10 +1,12 @@
 Class {
-	#name : #OntoUMLTransformGeneralization,
-	#superclass : #OntoUMLTransformation,
-	#category : #'OntoUML-TransformationFramework-Transformations'
+	#name : 'OntoUMLTransformGeneralization',
+	#superclass : 'OntoUMLTransformation',
+	#category : 'OntoUML-TransformationFramework-Transformations',
+	#package : 'OntoUML-TransformationFramework',
+	#tag : 'Transformations'
 }
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformGeneralization >> transform [
 	| generalization |
 	generalization := OPUMLGeneralization new.

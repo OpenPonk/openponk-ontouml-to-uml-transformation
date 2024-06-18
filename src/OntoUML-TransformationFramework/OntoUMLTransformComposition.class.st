@@ -1,10 +1,12 @@
 Class {
-	#name : #OntoUMLTransformComposition,
-	#superclass : #OntoUMLTransformation,
-	#category : #'OntoUML-TransformationFramework-Transformations'
+	#name : 'OntoUMLTransformComposition',
+	#superclass : 'OntoUMLTransformation',
+	#category : 'OntoUML-TransformationFramework-Transformations',
+	#package : 'OntoUML-TransformationFramework',
+	#tag : 'Transformations'
 }
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformComposition >> createComposition [
 	| composition |
 	composition := OPUMLAssociation new.
@@ -15,7 +17,7 @@ OntoUMLTransformComposition >> createComposition [
 	^ composition.
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformComposition >> createCompositionEndFor: aComposition withEndType: aEndType withOpposingEnd: aOpposingEndType navigable: aBoolean [
 	| end |
 	end := OPUMLProperty new
@@ -28,7 +30,7 @@ OntoUMLTransformComposition >> createCompositionEndFor: aComposition withEndType
 	^ end.
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 OntoUMLTransformComposition >> transform [
 	| composition |
 	composition := self createComposition.
