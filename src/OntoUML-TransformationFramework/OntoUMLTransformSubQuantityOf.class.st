@@ -16,9 +16,13 @@ OntoUMLTransformSubQuantityOf >> transform [
 ]
 
 { #category : 'transforming' }
-OntoUMLTransformSubQuantityOf >> transformEnd: aEnd forAssociation: aAssociation [
-	({ 'shared'. 'composite'. } includes: aEnd aggregation) ifTrue: [ aEnd owningClass: (aAssociation memberEnds reject: [ :end | end = aEnd. ]) first type. ].
-	aEnd aggregation: 'none'.
+OntoUMLTransformSubQuantityOf >> transformEnd: anEnd forAssociation: aAssociation [
+
+	({ 'shared'. 'composite' } includes: anEnd aggregation) ifTrue: [
+		anEnd owningAssociation: nil.
+		anEnd owningClass:
+			(aAssociation memberEnds reject: [ :end | end = anEnd ]) first type ].
+	anEnd aggregation: 'none'
 ]
 
 { #category : 'transforming' }

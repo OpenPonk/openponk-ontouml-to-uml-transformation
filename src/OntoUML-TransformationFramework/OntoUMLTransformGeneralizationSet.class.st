@@ -131,16 +131,21 @@ OntoUMLTransformGeneralizationSet >> createClassCombination [
 ]
 
 { #category : 'private - transforming - composition' }
-OntoUMLTransformGeneralizationSet >> createCompositionEndFor: aComposition withEndType: aEndType withOpposingEnd: aOpposingEndType navigable: aBoolean [
-	| end |
-	end := OPUMLProperty new
+OntoUMLTransformGeneralizationSet >> createCompositionEndFor: aComposition withEndType: anEndType withOpposingEnd: aOpposingEndType navigable: isNavigable [
+
+	| property |
+	property := OPUMLProperty new.
+	property
 		name: '';
 		lowerValue: (OPUMLLiteralInteger new value: 1);
 		upperValue: (OPUMLLiteralInteger new value: 1);
-		owningAssociation: aComposition;
-		type: aEndType.
-	aBoolean ifTrue: [ end owningClass: aOpposingEndType. ].
-	^ end.
+		type: anEndType.
+
+	isNavigable
+		ifTrue: [ property owningClass: aOpposingEndType ]
+		ifFalse: [ property owningAssociation: aComposition ].
+
+	^ property
 ]
 
 { #category : 'private - transforming - composition' }

@@ -18,16 +18,23 @@ OntoUMLTransformComposition >> createComposition [
 ]
 
 { #category : 'transforming' }
-OntoUMLTransformComposition >> createCompositionEndFor: aComposition withEndType: aEndType withOpposingEnd: aOpposingEndType navigable: aBoolean [
-	| end |
-	end := OPUMLProperty new
+OntoUMLTransformComposition >> createCompositionEndFor: aComposition withEndType: anEndType withOpposingEnd: aOpposingEndType navigable: isNavigable [
+
+	| property |
+	property := OPUMLProperty new.
+	property
 		name: '';
 		lowerValue: (OPUMLLiteralInteger new value: 1);
 		upperValue: (OPUMLLiteralInteger new value: 1);
-		owningAssociation: aComposition;
-		type: (controller getTransfomedElementFrom: aEndType).
-	aBoolean ifTrue: [ end owningClass: (controller getTransfomedElementFrom: aOpposingEndType). ].
-	^ end.
+		type: (controller getTransfomedElementFrom: anEndType).
+
+	isNavigable
+		ifTrue: [
+			property owningClass:
+				(controller getTransfomedElementFrom: aOpposingEndType) ]
+		ifFalse: [ property owningAssociation: aComposition ].
+
+	^ property
 ]
 
 { #category : 'transforming' }

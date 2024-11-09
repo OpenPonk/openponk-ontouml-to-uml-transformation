@@ -21,21 +21,30 @@ OntoUMLTransformAssociation >> createAssociation [
 
 { #category : 'transforming' }
 OntoUMLTransformAssociation >> tranformAssociationEnd: aAssociationEnd forAssociation: aAssociation [
-	^ OPUMLProperty new
+
+	| property |
+	property := OPUMLProperty new.
+	property
 		name: aAssociationEnd name;
 		lowerValue: aAssociationEnd lowerValue;
 		upperValue: aAssociationEnd upperValue;
-		type: (controller getTransfomedElementFrom: aAssociationEnd type);
-		owningAssociation: aAssociation;
-		owningClass: (aAssociationEnd owningClass ifNotNil: [controller getTransfomedElementFrom: aAssociationEnd owningClass]); "isNavigable"
+		type: (controller getTransfomedElementFrom: aAssociationEnd type).
+	property
 		isStatic: aAssociationEnd isStatic;
 		isReadOnly: aAssociationEnd isReadOnly;
 		isDerived: aAssociationEnd isDerived;
-		isOrdered: aAssociationEnd isOrdered;		
+		isOrdered: aAssociationEnd isOrdered;
 		isUnique: aAssociationEnd isUnique;
 		visibility: aAssociationEnd visibility;
 		aggregation: aAssociationEnd aggregation.
-		
+
+
+	aAssociationEnd owningClass
+		ifNil: [ property owningAssociation: aAssociation ]
+		ifNotNil: [ "isNavigable"
+			property owningClass:
+				(controller getTransfomedElementFrom: aAssociationEnd owningClass) ].
+	^ property
 ]
 
 { #category : 'transforming' }
