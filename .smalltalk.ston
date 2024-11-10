@@ -8,7 +8,7 @@ SmalltalkCISpec {
 			#directory : 'src'
 		}
 	],
-	#testing : 
+	#testing : {
 		#packages : [
 			'OpenPonk*'
 		],
