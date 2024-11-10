@@ -11,7 +11,7 @@ SmalltalkCISpec {
 	#testing : 
 		#packages : [
 			'OpenPonk*'
-		],{
+		],
 		#coverage : {
 			#packages : [
 				'OpenPonk-OntoUML-Transformation*'
