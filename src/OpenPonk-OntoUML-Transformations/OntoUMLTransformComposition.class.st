@@ -8,13 +8,28 @@ Class {
 
 { #category : 'transforming' }
 OntoUMLTransformComposition >> createComposition [
+
 	| composition |
 	composition := OPUMLAssociation new.
 	composition name: transformer name.
-	self createCompositionEndFor: composition withEndType: transformed general withOpposingEnd: transformed specific navigable: false.
-	self createCompositionEndFor: composition withEndType: transformed specific withOpposingEnd: transformed general navigable: true.
-	composition memberEnds addAll: composition ownedEnds.
-	^ composition.
+
+	composition memberEnds add: (self
+			 createCompositionEndFor: composition
+			 withEndType: transformed general
+			 withOpposingEnd: transformed specific
+			 navigable: false).
+	composition memberEnds add: (self
+			 createCompositionEndFor: composition
+			 withEndType: transformed specific
+			 withOpposingEnd: transformed general
+			 navigable: true).
+	self assert: composition memberEnds size = 2 description: [
+		'Generated association has only 1 end. '
+		, (transformer transformed generalizations size = 1
+				 ifTrue: [
+				 ' Might be caused by generalization set with only 1 generalization' ]
+				 ifFalse: [ '' ]) ].
+	^ composition
 ]
 
 { #category : 'transforming' }

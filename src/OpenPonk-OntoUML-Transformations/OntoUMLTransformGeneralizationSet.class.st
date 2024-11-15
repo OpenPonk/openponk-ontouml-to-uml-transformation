@@ -206,19 +206,25 @@ OntoUMLTransformGeneralizationSet >> setGeneralProperties [
 
 { #category : 'private - transforming - composition' }
 OntoUMLTransformGeneralizationSet >> setName [
-	((transformer name ifNil: [ '' ]) endsWith: 'XOR') ifTrue: [ ^ self. ].
-	transformer name: (transformer transformed name ifNil: [ transformer general name ]) , ' - XOR'.
+
+	((transformer name ifNil: [ '' ]) endsWith: 'XOR') ifTrue: [ ^ self ].
+	transformer name:
+		(transformer transformed name ifNil: [ transformer general name ])
+		, ' - XOR'
 ]
 
 { #category : 'transforming' }
 OntoUMLTransformGeneralizationSet >> transform [
-	| selection |	
- 	transformer transformed isDisjoint ifTrue: [ ^ self transformDisjointGeneralization. ].
+
+	| selection |
+	transformer transformed isDisjoint ifTrue: [
+		^ self transformDisjointGeneralization ].
 	selection := self getSelection.
-	(selection = 'Gen') ifTrue: [ ^ self transformAsGeneralization. ].
-	(selection = 'GenAndComp') ifTrue: [ ^ self transformAsGeneralizationAndComposition. ].
-	(selection = 'Comp') ifTrue: [ ^ self transformAsComposition. ].
-	^ nil.
+	selection = 'Gen' ifTrue: [ ^ self transformAsGeneralization ].
+	selection = 'GenAndComp' ifTrue: [
+		^ self transformAsGeneralizationAndComposition ].
+	selection = 'Comp' ifTrue: [ ^ self transformAsComposition ].
+	^ nil
 ]
 
 { #category : 'transforming' }
