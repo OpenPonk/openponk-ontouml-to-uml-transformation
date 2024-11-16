@@ -79,3 +79,11 @@ OntoUMLTransformation >> transformer: anObject [
 
 	transformer := anObject
 ]
+
+{ #category : 'as yet unclassified' }
+OntoUMLTransformation >> validateAssociation: anAssociation [
+
+	OPUmlAssociationController new
+		model: anAssociation;
+		validate
+]

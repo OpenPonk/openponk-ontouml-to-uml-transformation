@@ -155,6 +155,9 @@ OntoUMLTransformGeneralizationSet >> createCompositionWithSource: aSource withTa
 	self createCompositionEndFor: composition withEndType: aSource withOpposingEnd: aTarget navigable: true.
 	self createCompositionEndFor: composition withEndType: aTarget withOpposingEnd: aSource navigable: false.
 	composition memberEnds addAll: composition ownedEnds.
+	
+	self validateAssociation: composition.
+	
 	^ composition.
 ]
 

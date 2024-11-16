@@ -8,15 +8,23 @@ Class {
 
 { #category : 'transforming' }
 OntoUMLTransformAssociation >> createAssociation [
+
 	| association |
-	association := OPUMLAssociation new.	
-	association name: transformed name;
+	association := OPUMLAssociation new.
+	association
+		name: transformed name;
 		isDerived: transformed isDerived.
-	self tranformAssociationEnd: transformed memberEnds first forAssociation: association.
-	self tranformAssociationEnd: transformed memberEnds second forAssociation: association.
-	self copyCommentsFrom: transformed to: association. 
-	association memberEnds addAll: association ownedEnds asArray.
-	^ association.
+	association memberEnds add: (self
+			 tranformAssociationEnd: transformed memberEnds first
+			 forAssociation: association).
+	association memberEnds add: (self
+			 tranformAssociationEnd: transformed memberEnds second
+			 forAssociation: association).
+	self copyCommentsFrom: transformed to: association.
+
+	self validateAssociation: association.
+
+	^ association
 ]
 
 { #category : 'transforming' }
