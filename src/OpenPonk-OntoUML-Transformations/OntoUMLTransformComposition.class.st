@@ -23,12 +23,9 @@ OntoUMLTransformComposition >> createComposition [
 			 withEndType: transformed specific
 			 withOpposingEnd: transformed general
 			 navigable: true).
-	self assert: composition memberEnds size = 2 description: [
-		'Generated association has only 1 end. '
-		, (transformer transformed generalizations size = 1
-				 ifTrue: [
-				 ' Might be caused by generalization set with only 1 generalization' ]
-				 ifFalse: [ '' ]) ].
+			
+	self validateAssociation: composition.
+	
 	^ composition
 ]
 
