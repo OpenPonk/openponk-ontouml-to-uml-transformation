@@ -1,3 +1,6 @@
+"
+I select and initialize the appropriate transformation strategy for OntoUML classes.
+"
 Class {
 	#name : 'OntoUMLClassTransformer',
 	#superclass : 'OntoUMLTransformer',

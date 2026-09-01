@@ -1,3 +1,6 @@
+"
+I execute the transformation of specific OntoUML meronymic associations into standard UML composite aggregations, configuring appropriate navigability and aggregation properties.
+"
 Class {
 	#name : 'OntoUMLTransformComposition',
 	#superclass : 'OntoUMLTransformation',

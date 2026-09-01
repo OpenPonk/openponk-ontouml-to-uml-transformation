@@ -1,3 +1,6 @@
+"
+I select and initialize the appropriate transformation strategy for OntoUML associations.
+"
 Class {
 	#name : 'OntoUMLAssociationTransformer',
 	#superclass : 'OntoUMLTransformer',
@@ -6,7 +9,7 @@ Class {
 	#tag : 'Transformers'
 }
 
-{ #category : 'accessing' }
+{ #category : 'transforming' }
 OntoUMLAssociationTransformer class >> defaultTransformation [
 	^ OntoUMLTransformAssociation.
 ]

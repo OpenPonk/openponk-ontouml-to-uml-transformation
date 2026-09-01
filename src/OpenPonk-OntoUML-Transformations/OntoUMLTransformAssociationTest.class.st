@@ -1,3 +1,6 @@
+"
+I am a unit test class verifying the accurate mapping and structural conversion of OntoUML associations into standard UML associations during transformation.
+"
 Class {
 	#name : 'OntoUMLTransformAssociationTest',
 	#superclass : 'OntoUMLTransformationTest',

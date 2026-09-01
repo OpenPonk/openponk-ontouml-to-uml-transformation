@@ -1,3 +1,6 @@
+"
+I am the abstract base class for executing specific structural transformations on OntoUML model elements. I hold references to the element being transformed, the orchestrating controller, and the originating transformer.
+"
 Class {
 	#name : 'OntoUMLTransformation',
 	#superclass : 'Object',

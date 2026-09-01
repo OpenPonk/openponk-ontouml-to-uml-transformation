@@ -1,3 +1,6 @@
+"
+I am a Spec presenter providing UI toolbar menus and entry points to trigger the overall OntoUML to standard UML transformation process.
+"
 Class {
 	#name : 'TransformationUI',
 	#superclass : 'SpPresenter',
@@ -6,7 +9,7 @@ Class {
 	#tag : 'UI'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'layout' }
 TransformationUI class >> defaultLayout [
 ]
 
@@ -39,7 +42,7 @@ TransformationUI class >> transformToUML: aModel [
 		showAllElementsInAllDiagrams
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'initialization' }
 TransformationUI >> initializePresenters [
 	"We don't need to initialize anything."
 ]

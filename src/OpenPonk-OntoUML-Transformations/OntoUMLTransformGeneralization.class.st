@@ -1,3 +1,6 @@
+"
+I execute the transformation of an OntoUML generalization into a standard UML generalization without altering the taxonomic hierarchy.
+"
 Class {
 	#name : 'OntoUMLTransformGeneralization',
 	#superclass : 'OntoUMLTransformation',

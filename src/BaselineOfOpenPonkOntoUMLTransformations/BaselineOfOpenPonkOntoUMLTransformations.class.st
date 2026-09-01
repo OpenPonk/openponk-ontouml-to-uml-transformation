@@ -1,3 +1,6 @@
+"
+Metacello baseline for the OpenPonk OntoUML Transformations package, defining its package dependencies and load configurations.
+"
 Class {
 	#name : 'BaselineOfOpenPonkOntoUMLTransformations',
 	#superclass : 'BaselineOf',

@@ -1,3 +1,6 @@
+"
+I select and initialize the appropriate transformation strategy for OntoUML generalization sets, applying different logic depending on sortal or non-sortal constraints.
+"
 Class {
 	#name : 'OntoUMLGeneralizationSetTransformer',
 	#superclass : 'OntoUMLTransformer',

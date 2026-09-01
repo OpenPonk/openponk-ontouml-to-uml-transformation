@@ -1,3 +1,6 @@
+"
+I orchestrate the transformation of a complete OntoUML model into a standard UML model. I manage the mapping between original and transformed elements and dispatch specific transformers for classes, associations, generalizations, and generalization sets.
+"
 Class {
 	#name : 'OntoUMLTransformationController',
 	#superclass : 'Object',
@@ -36,8 +39,10 @@ OntoUMLTransformationController >> getTransfomedElementFrom: aOriginalElement [
 
 { #category : 'initialization' }
 OntoUMLTransformationController >> initialize [
+
+	super initialize.
 	self initializeTransformedModel.
-	transformedElements := Dictionary new.
+	transformedElements := Dictionary new
 ]
 
 { #category : 'initialization' }

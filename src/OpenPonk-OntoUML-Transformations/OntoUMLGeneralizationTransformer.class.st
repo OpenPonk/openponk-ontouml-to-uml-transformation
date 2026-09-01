@@ -1,3 +1,6 @@
+"
+I select and initialize the appropriate transformation strategy for standard OntoUML generalizations.
+"
 Class {
 	#name : 'OntoUMLGeneralizationTransformer',
 	#superclass : 'OntoUMLTransformer',

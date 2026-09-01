@@ -1,3 +1,6 @@
+"
+I am a Spec presenter that prompts the user to select a specific refactoring strategy (e.g., Generalization, Composition, or both) when resolving complex OntoUML generalization sets during model transformation.
+"
 Class {
 	#name : 'TransformGeneralizationSetUI',
 	#superclass : 'SpPresenter',
@@ -34,7 +37,7 @@ TransformGeneralizationSetUI class >> bottomLayout [
 		yourself.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'layout' }
 TransformGeneralizationSetUI class >> defaultLayout [
 		^ SpBoxLayout newTopToBottom
 		beNotHomogeneous;
@@ -198,10 +201,11 @@ TransformGeneralizationSetUI >> initializeRadioButtons [
 { #category : 'initialization' }
 TransformGeneralizationSetUI >> initializeWindow: aWindow [
 
+	super initializeWindow: aWindow.
 	aWindow
 		title: self class title;
 		resizable: false;
-		initialExtent: 700 @ 600.
+		initialExtent: 700 @ 600
 ]
 
 { #category : 'initialization' }
@@ -257,19 +261,19 @@ TransformGeneralizationSetUI >> radioGenAndComp: anObject [
 	radioGenAndComp := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : 'actions' }
 TransformGeneralizationSetUI >> selectComposition [
 	transformation := 'Comp'.
 	diagram image: self imageComposition.
 ]
 
-{ #category : 'accessing' }
+{ #category : 'actions' }
 TransformGeneralizationSetUI >> selectGenAndComp [
 	transformation := 'GenAndComp'.	
 	diagram image: self imageGeneralizationAndComposition.
 ]
 
-{ #category : 'accessing' }
+{ #category : 'actions' }
 TransformGeneralizationSetUI >> selectGeneralization [
 	transformation := 'Gen'.
 	diagram image: self imageGeneralization.

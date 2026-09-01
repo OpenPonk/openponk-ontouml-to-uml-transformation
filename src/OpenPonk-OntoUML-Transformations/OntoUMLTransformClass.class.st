@@ -1,3 +1,6 @@
+"
+I execute the transformation of an OntoUML stereotyped class into a standard UML class, mapping attributes, operations, and property constraints.
+"
 Class {
 	#name : 'OntoUMLTransformClass',
 	#superclass : 'OntoUMLTransformation',

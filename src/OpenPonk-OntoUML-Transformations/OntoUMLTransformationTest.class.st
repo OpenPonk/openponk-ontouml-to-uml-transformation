@@ -1,3 +1,6 @@
+"
+I am a unit test class verifying the state initialization and basic mechanics of OntoUML model transformations.
+"
 Class {
 	#name : 'OntoUMLTransformationTest',
 	#superclass : 'TestCase',
@@ -6,8 +9,9 @@ Class {
 	#tag : 'Transformations'
 }
 
-{ #category : 'utility' }
+{ #category : 'utilities' }
 OntoUMLTransformationTest >> createAssociationFrom: aSource to: aEnd [
+
 	| association |
 	association := OPUMLAssociation new.
 	OPUMLProperty new
@@ -22,11 +26,11 @@ OntoUMLTransformationTest >> createAssociationFrom: aSource to: aEnd [
 		upperValue: (OPUMLLiteralUnlimitedNatural new value: 1);
 		owningAssociation: association;
 		type: aEnd.
-	association memberEnds addAll: association ownedEnds asArray.
+	association memberEnds addAll: association ownedEnds.
 	^ association
 ]
 
-{ #category : 'utility' }
+{ #category : 'utilities' }
 OntoUMLTransformationTest >> createAssociationFrom: aSource to: aEnd with: aStereotype [ 
 	| association |
 	association := self createAssociationFrom: aSource to: aEnd.

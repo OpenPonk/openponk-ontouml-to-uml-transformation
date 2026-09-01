@@ -1,3 +1,6 @@
+"
+I execute the transformation of the OntoUML `«subQuantityOf»` meronymic association into its standard UML equivalent.
+"
 Class {
 	#name : 'OntoUMLTransformSubQuantityOf',
 	#superclass : 'OntoUMLTransformation',
