@@ -1,3 +1,6 @@
+"
+I execute the transformation of an OntoUML stereotyped association into a standard UML association, ensuring correct mapping of member ends and multiplicities.
+"
 Class {
 	#name : 'OntoUMLTransformAssociation',
 	#superclass : 'OntoUMLTransformation',

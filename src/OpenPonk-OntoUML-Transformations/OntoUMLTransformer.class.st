@@ -1,3 +1,6 @@
+"
+I am the abstract base class responsible for selecting and initializing the appropriate transformation strategy (an OntoUMLTransformation) for a given OntoUML element.
+"
 Class {
 	#name : 'OntoUMLTransformer',
 	#superclass : 'Object',

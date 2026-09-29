@@ -1,3 +1,6 @@
+"
+I execute complex refactoring of OntoUML generalization sets. I flatten or restructure class hierarchies using standard generalizations, compositions, or a combination thereof, based on selected user strategies.
+"
 Class {
 	#name : 'OntoUMLTransformGeneralizationSet',
 	#superclass : 'OntoUMLTransformation',
