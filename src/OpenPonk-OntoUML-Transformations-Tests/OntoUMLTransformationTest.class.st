@@ -4,8 +4,8 @@ I am a unit test class verifying the state initialization and basic mechanics of
 Class {
 	#name : 'OntoUMLTransformationTest',
 	#superclass : 'TestCase',
-	#category : 'OpenPonk-OntoUML-Transformations-Transformations',
-	#package : 'OpenPonk-OntoUML-Transformations',
+	#category : 'OpenPonk-OntoUML-Transformations-Tests-Transformations',
+	#package : 'OpenPonk-OntoUML-Transformations-Tests',
 	#tag : 'Transformations'
 }
 

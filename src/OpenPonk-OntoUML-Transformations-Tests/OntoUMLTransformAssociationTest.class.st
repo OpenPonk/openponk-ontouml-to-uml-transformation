@@ -4,8 +4,8 @@ I am a unit test class verifying the accurate mapping and structural conversion 
 Class {
 	#name : 'OntoUMLTransformAssociationTest',
 	#superclass : 'OntoUMLTransformationTest',
-	#category : 'OpenPonk-OntoUML-Transformations-Transformations',
-	#package : 'OpenPonk-OntoUML-Transformations',
+	#category : 'OpenPonk-OntoUML-Transformations-Tests-Transformations',
+	#package : 'OpenPonk-OntoUML-Transformations-Tests',
 	#tag : 'Transformations'
 }
 

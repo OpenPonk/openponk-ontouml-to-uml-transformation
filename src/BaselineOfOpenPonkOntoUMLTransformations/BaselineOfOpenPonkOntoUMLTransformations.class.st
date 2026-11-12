@@ -24,10 +24,11 @@ BaselineOfOpenPonkOntoUMLTransformations >> baseline: spec [
 				copyFrom: 'OpenPonkOntoUMLModelQuery-Plugin'
 				with: [ spec loads: 'default' ].
 			spec package: 'OpenPonk-OntoUML-Transformations'.
+			spec package: 'OpenPonk-OntoUML-Transformations-Tests' with: [ spec requires: #('OpenPonk-OntoUML-Transformations') ].
 			spec
 				group: 'plugin'
-				with: #('OpenPonkOntoUMLModelQuery-Plugin' 'OpenPonk-OntoUML-Transformations').
+				with: #('OpenPonkOntoUMLModelQuery-Plugin' 'OpenPonk-OntoUML-Transformations' 'OpenPonk-OntoUML-Transformations-Tests').
 			spec
 				group: 'default'
-				with: #(OpenPonkOntoUMLModelQuery 'OpenPonk-OntoUML-Transformations') ]
+				with: #(OpenPonkOntoUMLModelQuery 'OpenPonk-OntoUML-Transformations' 'OpenPonk-OntoUML-Transformations-Tests') ]
 ]
