@@ -45,53 +45,54 @@ OntoUMLTransformationTest >> getTestedClass [
 
 { #category : 'tests' }
 OntoUMLTransformationTest >> testController [
-	| tested controller alternativeController | 
+
+	| tested controller alternativeController |
 	tested := self getTestedClass new.
 	controller := OntoUMLTransformationController basicNew.
 	alternativeController := OntoUMLTransformationController basicNew.
 	tested controller: controller.
-	self assert: tested controller equals: controller.
+	self assert: tested controller identicalTo: controller.
 	tested controller: alternativeController.
-	self assert: tested controller equals: alternativeController.
-	
+	self assert: tested controller identicalTo: alternativeController
 ]
 
 { #category : 'tests' }
 OntoUMLTransformationTest >> testNewWithTransformedWithControllerWithTransformer [
+
 	| testedClass testedInstance controller transformed transformer |
-	testedClass :=  self getTestedClass.
+	testedClass := self getTestedClass.
 	controller := OntoUMLTransformationController basicNew.
 	transformed := OPUMLClass new.
 	transformer := OntoUMLTransformer basicNew.
 	testedInstance := testedClass newWithTransformed: transformed withController: controller withTransformer: transformer.
-	self assert: testedInstance class equals: testedClass.
-	self assert: testedInstance controller equals: controller.
-	self assert: testedInstance transformer equals: transformer.
-	self assert: testedInstance transformed equals: transformed. 
+	self assert: testedInstance class identicalTo: testedClass.
+	self assert: testedInstance controller identicalTo: controller.
+	self assert: testedInstance transformer identicalTo: transformer.
+	self assert: testedInstance transformed identicalTo: transformed
 ]
 
 { #category : 'tests' }
 OntoUMLTransformationTest >> testTransformed [
-	| tested transformed alternativeTransformed | 
+
+	| tested transformed alternativeTransformed |
 	tested := self getTestedClass new.
 	transformed := OPUMLClass new.
 	alternativeTransformed := OPUMLAssociation new.
 	tested transformed: transformed.
-	self assert: tested transformed equals: transformed.
+	self assert: tested transformed identicalTo: transformed.
 	tested transformed: alternativeTransformed.
-	self assert: tested transformed equals: alternativeTransformed.
-	
+	self assert: tested transformed identicalTo: alternativeTransformed
 ]
 
 { #category : 'tests' }
 OntoUMLTransformationTest >> testTransformer [
-	| tested transformer alternativeTransformer | 
+
+	| tested transformer alternativeTransformer |
 	tested := OntoUMLTransformation new.
 	transformer := OntoUMLClassTransformer basicNew.
 	alternativeTransformer := OntoUMLAssociationTransformer basicNew.
 	tested transformer: transformer.
-	self assert: tested transformer equals: transformer.
+	self assert: tested transformer identicalTo: transformer.
 	tested transformer: alternativeTransformer.
-	self assert: tested transformer equals: alternativeTransformer.
-	
+	self assert: tested transformer identicalTo: alternativeTransformer
 ]

@@ -20,23 +20,33 @@ OntoUMLTransformAssociationTest >> getAssociation [
 
 { #category : 'tests' }
 OntoUMLTransformAssociationTest >> testCreateAssociationValidatesWithoutUiController [
-	| controller source target association transformer resultAssociation |
+
+	| controller source target transformedSource transformedTarget association transformer resultAssociation |
 	controller := OntoUMLTransformationController new.
 	source := OPUMLClass new name: 'Source'.
 	target := OPUMLClass new name: 'Target'.
-	controller addTranformationLinkBetween: source and: (OPUMLClass new name: 'Source').
-	controller addTranformationLinkBetween: target and: (OPUMLClass new name: 'Target').
+	transformedSource := OPUMLClass new name: 'Source'.
+	transformedTarget := OPUMLClass new name: 'Target'.
+	controller addTranformationLinkBetween: source and: transformedSource.
+	controller addTranformationLinkBetween: target and: transformedTarget.
 
 	association := self createAssociationFrom: source to: target.
 	association name: 'rel'.
 	association isDerived: false.
 
 	transformer := OntoUMLTransformAssociation
-		newWithTransformed: association
-		withController: controller
-		withTransformer: OntoUMLAssociationTransformer new.
+		               newWithTransformed: association
+		               withController: controller
+		               withTransformer: OntoUMLAssociationTransformer new.
 
 	resultAssociation := transformer createAssociation.
-	self assert: resultAssociation isNotNil.
-	self assert: resultAssociation memberEnds size equals: 2
+	self assert: resultAssociation class identicalTo: OPUMLAssociation.
+	self deny: resultAssociation identicalTo: association.
+	self assert: resultAssociation name equals: 'rel'.
+	self deny: resultAssociation isDerived description: 'Transformed association must preserve isDerived = false'.
+	self assert: resultAssociation memberEnds size equals: 2.
+	self assert: resultAssociation memberEnds first type identicalTo: transformedSource.
+	self assert: resultAssociation memberEnds second type identicalTo: transformedTarget.
+	self assert: resultAssociation memberEnds first owningAssociation identicalTo: resultAssociation.
+	self assert: resultAssociation memberEnds second owningAssociation identicalTo: resultAssociation
 ]
