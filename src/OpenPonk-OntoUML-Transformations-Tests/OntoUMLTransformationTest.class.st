@@ -9,38 +9,35 @@ Class {
 	#tag : 'Transformations'
 }
 
-{ #category : 'utilities' }
-OntoUMLTransformationTest >> createAssociationFrom: aSource to: aEnd [
-
-	| association |
-	association := OPUMLAssociation new.
-	OPUMLProperty new
-		name: '';
-		lowerValue: (OPUMLLiteralInteger new value: 1);
-		upperValue: (OPUMLLiteralUnlimitedNatural new value: 1);
-		owningAssociation: association;
-		type: aSource.
-	OPUMLProperty new
-		name: '';
-		lowerValue: (OPUMLLiteralInteger new value: 1);
-		upperValue: (OPUMLLiteralUnlimitedNatural new value: 1);
-		owningAssociation: association;
-		type: aEnd.
-	association memberEnds addAll: association ownedEnds.
-	^ association
-]
-
-{ #category : 'utilities' }
-OntoUMLTransformationTest >> createAssociationFrom: aSource to: aEnd with: aStereotype [ 
-	| association |
-	association := self createAssociationFrom: aSource to: aEnd.
-	association applyStereotype: aStereotype.
-	^ association.
-]
-
 { #category : 'constants' }
 OntoUMLTransformationTest >> getTestedClass [
 	^ OntoUMLTransformation.
+]
+
+{ #category : 'tests' }
+OntoUMLTransformationTest >> testClassTransformWithControllerWithTransformerExecutesConcreteSubclass [
+
+	| controller sourceGeneral transformedGeneral sourceSpecific transformedSpecific generalization resultGeneralization |
+	controller := OntoUMLTransformationController new.
+	sourceGeneral := OPUMLClass new name: 'Parent'.
+	sourceSpecific := OPUMLClass new name: 'Child'.
+	transformedGeneral := OPUMLClass new name: 'Parent'.
+	transformedSpecific := OPUMLClass new name: 'Child'.
+	controller addTransformationLinkBetween: sourceGeneral and: transformedGeneral.
+	controller addTransformationLinkBetween: sourceSpecific and: transformedSpecific.
+	generalization := OPUMLGeneralization new
+		                  general: sourceGeneral;
+		                  specific: sourceSpecific;
+		                  yourself.
+
+	resultGeneralization := OntoUMLTransformGeneralization
+		                        transform: generalization
+		                        withController: controller
+		                        withTransformer: OntoUMLGeneralizationTransformer new.
+
+	self assert: resultGeneralization class identicalTo: OPUMLGeneralization.
+	self assert: resultGeneralization general identicalTo: transformedGeneral.
+	self assert: resultGeneralization specific identicalTo: transformedSpecific
 ]
 
 { #category : 'tests' }
@@ -48,8 +45,8 @@ OntoUMLTransformationTest >> testController [
 
 	| tested controller alternativeController |
 	tested := self getTestedClass new.
-	controller := OntoUMLTransformationController basicNew.
-	alternativeController := OntoUMLTransformationController basicNew.
+	controller := OntoUMLTransformationController new.
+	alternativeController := OntoUMLTransformationController new.
 	tested controller: controller.
 	self assert: tested controller identicalTo: controller.
 	tested controller: alternativeController.
@@ -57,13 +54,34 @@ OntoUMLTransformationTest >> testController [
 ]
 
 { #category : 'tests' }
+OntoUMLTransformationTest >> testCopyCommentsCopiesBodiesAsDistinctComments [
+
+	| transformation sourceClass targetClass firstComment secondComment |
+	transformation := self getTestedClass new.
+	sourceClass := OPUMLClass new name: 'Source'.
+	firstComment := OPUMLComment new body: 'First note'.
+	secondComment := OPUMLComment new body: 'Second note'.
+	sourceClass ownedComments: {
+			firstComment.
+			secondComment }.
+	targetClass := OPUMLClass new name: 'Target'.
+
+	transformation copyCommentsFrom: sourceClass to: targetClass.
+
+	self assert: targetClass ownedComments size equals: 2.
+	self assert: (targetClass ownedComments collect: #body as: Array) equals: #( 'First note' 'Second note' ).
+	self deny: targetClass ownedComments first identicalTo: firstComment.
+	self deny: targetClass ownedComments second identicalTo: secondComment
+]
+
+{ #category : 'tests' }
 OntoUMLTransformationTest >> testNewWithTransformedWithControllerWithTransformer [
 
 	| testedClass testedInstance controller transformed transformer |
 	testedClass := self getTestedClass.
-	controller := OntoUMLTransformationController basicNew.
+	controller := OntoUMLTransformationController new.
 	transformed := OPUMLClass new.
-	transformer := OntoUMLTransformer basicNew.
+	transformer := OntoUMLClassTransformer new.
 	testedInstance := testedClass newWithTransformed: transformed withController: controller withTransformer: transformer.
 	self assert: testedInstance class identicalTo: testedClass.
 	self assert: testedInstance controller identicalTo: controller.
@@ -88,9 +106,9 @@ OntoUMLTransformationTest >> testTransformed [
 OntoUMLTransformationTest >> testTransformer [
 
 	| tested transformer alternativeTransformer |
-	tested := OntoUMLTransformation new.
-	transformer := OntoUMLClassTransformer basicNew.
-	alternativeTransformer := OntoUMLAssociationTransformer basicNew.
+	tested := self getTestedClass new.
+	transformer := OntoUMLClassTransformer new.
+	alternativeTransformer := OntoUMLAssociationTransformer new.
 	tested transformer: transformer.
 	self assert: tested transformer identicalTo: transformer.
 	tested transformer: alternativeTransformer.

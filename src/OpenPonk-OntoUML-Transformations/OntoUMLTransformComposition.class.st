@@ -41,12 +41,10 @@ OntoUMLTransformComposition >> createCompositionEndFor: aComposition withEndType
 		name: '';
 		lowerValue: (OPUMLLiteralInteger new value: 1);
 		upperValue: (OPUMLLiteralInteger new value: 1);
-		type: (controller getTransfomedElementFrom: anEndType).
+		type: (controller getTransformedElementFrom: anEndType).
 
 	isNavigable
-		ifTrue: [
-			property owningClass:
-				(controller getTransfomedElementFrom: aOpposingEndType) ]
+		ifTrue: [ property owningClass: (controller getTransformedElementFrom: aOpposingEndType) ]
 		ifFalse: [ property owningAssociation: aComposition ].
 
 	^ property

@@ -55,6 +55,18 @@ OntoUMLTransformation >> copyCommentsFrom: aOriginalElement to: aTransformedElem
 ]
 
 { #category : 'transforming' }
+OntoUMLTransformation >> copyMultiplicity: aMultiplicity [
+
+	| copy |
+	aMultiplicity ifNil: [ ^ nil ].
+	copy := aMultiplicity class new.
+	copy
+		value: aMultiplicity value;
+		visibility: aMultiplicity visibility.
+	^ copy
+]
+
+{ #category : 'transforming' }
 OntoUMLTransformation >> transform [
 	^ self subclassResponsibility.
 ]

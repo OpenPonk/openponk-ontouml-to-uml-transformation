@@ -15,10 +15,11 @@ OntoUMLAssociationTransformer class >> defaultTransformation [
 ]
 
 { #category : 'transforming' }
-OntoUMLAssociationTransformer class >> getTransformation: aAssocitaion [
+OntoUMLAssociationTransformer class >> getTransformation: anAssociation [
+
 	| stereotypeClass |
-	stereotypeClass := OntoUMLModelQuery getStereotypeClass: aAssocitaion.
-	^ super getTransformation: stereotypeClass.
+	stereotypeClass := OntoUMLModelQuery getStereotypeClass: anAssociation.
+	^ super getTransformation: stereotypeClass
 ]
 
 { #category : 'transforming' }

@@ -89,9 +89,9 @@ OntoUMLTransformGeneralizationSet >> combineUsingGeneralization: aAddedClass wit
 
 { #category : 'transforming' }
 OntoUMLTransformGeneralizationSet >> combineUsingGeneralizationAndComposition: aAddedClass with: aCompositeClass [
-	aCompositeClass name: aCompositeClass name, aAddedClass name.
-	^ { self createCompositionWithSource: (controller getTransfomedElementFrom: aAddedClass) withTarget: aCompositeClass. }.
-	
+
+	aCompositeClass name: aCompositeClass name , aAddedClass name.
+	^ { (self createCompositionWithSource: (controller getTransformedElementFrom: aAddedClass) withTarget: aCompositeClass) }
 ]
 
 { #category : 'private - transforming - generalization' }
@@ -166,7 +166,8 @@ OntoUMLTransformGeneralizationSet >> createCompositionWithSource: aSource withTa
 
 { #category : 'private - transforming - generalization' }
 OntoUMLTransformGeneralizationSet >> createGeneralizationFor: aSpecific [
-	^ self createGeneralizationWithGeneral: (controller getTransfomedElementFrom: transformed first general) withSpecific: aSpecific.
+
+	^ self createGeneralizationWithGeneral: (controller getTransformedElementFrom: transformed first general) withSpecific: aSpecific
 ]
 
 { #category : 'private - transforming - generalization' }
@@ -258,18 +259,20 @@ OntoUMLTransformGeneralizationSet >> transformClassCombination: aIndex [
 
 { #category : 'transforming' }
 OntoUMLTransformGeneralizationSet >> transformDisjointGeneralization [
+
 	self initializeArrays.
-	^ elements collect: [ :element | self createGeneralizationFor: (controller getTransfomedElementFrom: element). ].
+	^ elements collect: [ :element | self createGeneralizationFor: (controller getTransformedElementFrom: element) ]
 ]
 
 { #category : 'private - transforming - generalization' }
 OntoUMLTransformGeneralizationSet >> transformWithCombination: aCombinationSelector [
+
 	| maxIndex results |
 	self setGeneralProperties.
 	self initializeArrays.
 	combinationSelector := aCombinationSelector.
 	maxIndex := 2 raisedTo: elements size.
-	results := ((3 to: maxIndex) flatCollect: [ :i | self transformClassCombination: i. ]) asOrderedCollection. "we can ignore first two indexes"
-	results addAll: (elements collect: [ :element | self createGeneralizationFor: (controller getTransfomedElementFrom: element).]).
-	^ results.
+	results := ((3 to: maxIndex) flatCollect: [ :i | self transformClassCombination: i ]) asOrderedCollection. "we can ignore first two indexes"
+	results addAll: (elements collect: [ :element | self createGeneralizationFor: (controller getTransformedElementFrom: element) ]).
+	^ results
 ]

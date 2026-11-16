@@ -17,12 +17,8 @@ OntoUMLTransformAssociation >> createAssociation [
 	association
 		name: transformed name;
 		isDerived: transformed isDerived.
-	association memberEnds add: (self
-			 tranformAssociationEnd: transformed memberEnds first
-			 forAssociation: association).
-	association memberEnds add: (self
-			 tranformAssociationEnd: transformed memberEnds second
-			 forAssociation: association).
+	association memberEnds add: (self transformAssociationEnd: transformed memberEnds first forAssociation: association).
+	association memberEnds add: (self transformAssociationEnd: transformed memberEnds second forAssociation: association).
 	self copyCommentsFrom: transformed to: association.
 
 	self validateAssociation: association.
@@ -31,15 +27,25 @@ OntoUMLTransformAssociation >> createAssociation [
 ]
 
 { #category : 'transforming' }
-OntoUMLTransformAssociation >> tranformAssociationEnd: aAssociationEnd forAssociation: aAssociation [
+OntoUMLTransformAssociation >> transform [
+
+	| association |
+	association := self createAssociation.
+	controller addTransformationLinkBetween: transformed and: association.
+	controller addElementToTransformedModel: association.
+	^ association
+]
+
+{ #category : 'transforming' }
+OntoUMLTransformAssociation >> transformAssociationEnd: aAssociationEnd forAssociation: aAssociation [
 
 	| property |
 	property := OPUMLProperty new.
 	property
 		name: aAssociationEnd name;
-		lowerValue: aAssociationEnd lowerValue;
-		upperValue: aAssociationEnd upperValue;
-		type: (controller getTransfomedElementFrom: aAssociationEnd type).
+		lowerValue: (self copyMultiplicity: aAssociationEnd lowerValue);
+		upperValue: (self copyMultiplicity: aAssociationEnd upperValue);
+		type: (controller getTransformedElementFrom: aAssociationEnd type).
 	property
 		isStatic: aAssociationEnd isStatic;
 		isReadOnly: aAssociationEnd isReadOnly;
@@ -49,20 +55,8 @@ OntoUMLTransformAssociation >> tranformAssociationEnd: aAssociationEnd forAssoci
 		visibility: aAssociationEnd visibility;
 		aggregation: aAssociationEnd aggregation.
 
-
 	aAssociationEnd owningClass
 		ifNil: [ property owningAssociation: aAssociation ]
-		ifNotNil: [ "isNavigable"
-			property owningClass:
-				(controller getTransfomedElementFrom: aAssociationEnd owningClass) ].
+		ifNotNil: [ "isNavigable" property owningClass: (controller getTransformedElementFrom: aAssociationEnd owningClass) ].
 	^ property
-]
-
-{ #category : 'transforming' }
-OntoUMLTransformAssociation >> transform [
-	| association |
-	association := self createAssociation.
-	controller addTranformationLinkBetween: transformed and: association.
-	controller addElementToTransformedModel: association.
-	^ association.
 ]

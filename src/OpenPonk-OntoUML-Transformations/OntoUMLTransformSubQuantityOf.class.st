@@ -21,14 +21,16 @@ OntoUMLTransformSubQuantityOf >> transform [
 { #category : 'transforming' }
 OntoUMLTransformSubQuantityOf >> transformEnd: anEnd forAssociation: aAssociation [
 
-	({ 'shared'. 'composite' } includes: anEnd aggregation) ifTrue: [
-		anEnd owningAssociation: nil.
-		anEnd owningClass:
-			(aAssociation memberEnds reject: [ :end | end = anEnd ]) first type ].
-	anEnd aggregation: 'none'
+	({
+		 OPUMLAggregationKind shared.
+		 OPUMLAggregationKind composite } includes: anEnd aggregation) ifTrue: [
+			anEnd owningAssociation: nil.
+			anEnd owningClass: (aAssociation memberEnds reject: [ :end | end = anEnd ]) first type ].
+	anEnd aggregation: OPUMLAggregationKind none
 ]
 
 { #category : 'transforming' }
 OntoUMLTransformSubQuantityOf >> transformName: aAssociation [
-	(aAssociation name notNil and: [ aAssociation name ~= ''. ]) ifFalse: [ aAssociation name: 'containment'. ].
+
+	(aAssociation name isNotNil and: [ aAssociation name ~= '' ]) ifFalse: [ aAssociation name: 'containment' ]
 ]

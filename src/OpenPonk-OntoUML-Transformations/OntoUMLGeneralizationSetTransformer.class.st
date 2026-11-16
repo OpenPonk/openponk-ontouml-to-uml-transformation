@@ -50,7 +50,8 @@ OntoUMLGeneralizationSetTransformer class >> savedTransformation: anObject [
 
 { #category : 'accessing' }
 OntoUMLGeneralizationSetTransformer >> general [
-	^ controller getTransfomedElementFrom: transformed generalizations first general.
+
+	^ controller getTransformedElementFrom: transformed generalizations first general
 ]
 
 { #category : 'accessing' }
