@@ -136,7 +136,6 @@ OntoUMLTransformationControllerTest >> testTransformModelTransformsFullOntoUMLPa
 
 	| sourcePackage resultModel transformedClasses transformedAssociations transformedGeneralizations personClass |
 	sourcePackage := self buildSampleOntoUMLPackage.
-	OntoUMLGeneralizationSetTransformer savedTransformation: 'Gen'.
 
 	resultModel := OntoUMLTransformationController transformModel: sourcePackage.
 
@@ -146,7 +145,7 @@ OntoUMLTransformationControllerTest >> testTransformModelTransformsFullOntoUMLPa
 
 	transformedClasses := resultModel packagedElements select: [ :each | each isKindOf: OPUMLClass ].
 	transformedAssociations := resultModel packagedElements select: [ :each | each isKindOf: OPUMLAssociation ].
-	transformedGeneralizations := resultModel packagedElements select: [ :each | each isKindOf: OPUMLGeneralization ].
+	transformedGeneralizations := transformedClasses flatCollect: #generalizations.
 
 	self
 		assertCollection: (transformedClasses collect: #name)
@@ -157,6 +156,7 @@ OntoUMLTransformationControllerTest >> testTransformModelTransformsFullOntoUMLPa
 	self
 		assertCollection: (transformedAssociations collect: #name)
 		hasSameElements: #( 'drinks' 'containment' 'personRoles - XOR' 'personRoles - XOR' ).
+	self assertEmpty: (resultModel packagedElements select: [ :each | each isKindOf: OPUMLGeneralization ]).
 	self assert: transformedGeneralizations size equals: 1.
 	self assert: transformedGeneralizations first specific name equals: 'Adult'.
 	self assert: transformedGeneralizations first general name equals: 'Person'.

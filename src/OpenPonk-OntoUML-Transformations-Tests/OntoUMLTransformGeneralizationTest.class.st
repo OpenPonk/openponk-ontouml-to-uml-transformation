@@ -39,6 +39,6 @@ OntoUMLTransformGeneralizationTest >> testTransformMapsEndpointsCopiesCommentsAn
 	self assert: resultGeneralization ownedComments size equals: 1.
 	self assert: resultGeneralization ownedComments first body equals: 'Generalization note'.
 	self deny: resultGeneralization ownedComments first identicalTo: sourceComment.
-	self assertCollection: controller transformedModel packagedElements hasSameElements: { resultGeneralization }.
+	self assertEmpty: controller transformedModel packagedElements.
 	self assertCollection: transformedSpecific generalizations hasSameElements: { resultGeneralization }
 ]

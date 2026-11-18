@@ -12,7 +12,7 @@ Class {
 { #category : 'tests' }
 OntoUMLGeneralizationTransformerTest >> testGetTransformationMapsAntiRigidAndMixinSpecificsToComposition [
 
-	| phaseClass roleClass mixinClass roleMixinClass subKindClass plainClass |
+	| phaseClass roleClass mixinClass roleMixinClass phaseMixinClass subKindClass plainClass |
 	phaseClass := OPUMLClass new
 		              applyStereotype: OntoUMLPhase new;
 		              yourself.
@@ -25,6 +25,9 @@ OntoUMLGeneralizationTransformerTest >> testGetTransformationMapsAntiRigidAndMix
 	roleMixinClass := OPUMLClass new
 		                  applyStereotype: OntoUMLRoleMixin new;
 		                  yourself.
+	phaseMixinClass := OPUMLClass new
+		                   applyStereotype: OntoUMLPhaseMixin new;
+		                   yourself.
 	subKindClass := OPUMLClass new
 		                applyStereotype: OntoUMLSubKind new;
 		                yourself.
@@ -36,7 +39,8 @@ OntoUMLGeneralizationTransformerTest >> testGetTransformationMapsAntiRigidAndMix
 			phaseClass.
 			roleClass.
 			mixinClass.
-			roleMixinClass } do: [ :each |
+			roleMixinClass.
+			phaseMixinClass } do: [ :each |
 			self assert: (OntoUMLGeneralizationTransformer getTransformation: each) identicalTo: OntoUMLTransformComposition ].
 		{
 			subKindClass.
@@ -49,6 +53,36 @@ OntoUMLGeneralizationTransformerTest >> testGetTransformationMapsAntiRigidAndMix
 OntoUMLGeneralizationTransformerTest >> testNameReturnsEmptyString [
 
 	self assert: OntoUMLGeneralizationTransformer new name equals: ''
+]
+
+{ #category : 'tests' }
+OntoUMLGeneralizationTransformerTest >> testTransformCreatesCompositionForPhaseMixinSpecialization [
+
+	| controller generalClass specificClass transformedGeneral transformedSpecific generalization result |
+	controller := OntoUMLTransformationController new.
+	generalClass := OPUMLClass new
+		                name: 'Entity';
+		                applyStereotype: OntoUMLCategory new;
+		                yourself.
+	specificClass := OPUMLClass new
+		                 name: 'EligibleEntity';
+		                 applyStereotype: OntoUMLPhaseMixin new;
+		                 yourself.
+	transformedGeneral := OPUMLClass new name: 'Entity'.
+	transformedSpecific := OPUMLClass new name: 'EligibleEntity'.
+	controller addTransformationLinkBetween: generalClass and: transformedGeneral.
+	controller addTransformationLinkBetween: specificClass and: transformedSpecific.
+	generalization := OPUMLGeneralization new
+		                  general: generalClass;
+		                  specific: specificClass;
+		                  yourself.
+
+	result := OntoUMLGeneralizationTransformer transform: generalization withController: controller.
+
+	self assert: result class identicalTo: OPUMLAssociation.
+	self assert: result name equals: ''.
+	self assert: result memberEnds second owningClass identicalTo: transformedGeneral.
+	self assertCollection: controller transformedModel packagedElements hasSameElements: { result }
 ]
 
 { #category : 'tests' }
@@ -108,5 +142,6 @@ OntoUMLGeneralizationTransformerTest >> testTransformCreatesGeneralizationForSub
 	self assert: result class identicalTo: OPUMLGeneralization.
 	self assert: result general identicalTo: transformedGeneral.
 	self assert: result specific identicalTo: transformedSpecific.
-	self assertCollection: controller transformedModel packagedElements hasSameElements: { result }
+	self assertEmpty: controller transformedModel packagedElements.
+	self assertCollection: transformedSpecific generalizations hasSameElements: { result }
 ]

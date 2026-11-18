@@ -17,6 +17,5 @@ OntoUMLTransformGeneralization >> transform [
 	generalization specific: (controller getTransformedElementFrom: transformed specific).
 	generalization general: (controller getTransformedElementFrom: transformed general).
 	self copyCommentsFrom: transformed to: generalization.
-	controller addElementToTransformedModel: generalization.
 	^ generalization
 ]

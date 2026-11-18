@@ -23,12 +23,13 @@ OntoUMLGeneralizationTransformer class >> getTransformation: aClass [
 
 { #category : 'transforming' }
 OntoUMLGeneralizationTransformer class >> initializeTransformationIndex [
+
 	transformationIndex := Dictionary new.
-	transformationIndex add: (OntoUMLPhase -> OntoUMLTransformComposition).
-	transformationIndex add: (OntoUMLMixin -> OntoUMLTransformComposition).
-	transformationIndex add: (OntoUMLRole -> OntoUMLTransformComposition).
-	transformationIndex add: (OntoUMLRoleMixin -> OntoUMLTransformComposition).
-	
+	transformationIndex add: OntoUMLPhase -> OntoUMLTransformComposition.
+	transformationIndex add: OntoUMLMixin -> OntoUMLTransformComposition.
+	transformationIndex add: OntoUMLRole -> OntoUMLTransformComposition.
+	transformationIndex add: OntoUMLRoleMixin -> OntoUMLTransformComposition.
+	transformationIndex add: OntoUMLPhaseMixin -> OntoUMLTransformComposition
 ]
 
 { #category : 'transforming' }

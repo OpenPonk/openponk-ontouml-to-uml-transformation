@@ -16,6 +16,20 @@ OntoUMLAbstractTransformationTest class >> isAbstract [
 ]
 
 { #category : 'utilities' }
+OntoUMLAbstractTransformationTest >> collectAssociationValidationWarningsIn: aUMLPackage [
+
+	| validationWarnings |
+	validationWarnings := OrderedCollection new.
+	aUMLPackage packagedElements select: [ :each | each isKindOf: OPUMLAssociation ] thenDo: [ :association |
+			[ (OPUmlAssociationViewModel new model: association) validate ]
+				on: OPModelInvalid
+				do: [ :warning |
+						validationWarnings add: warning messageText.
+						warning resume ] ].
+	^ validationWarnings
+]
+
+{ #category : 'utilities' }
 OntoUMLAbstractTransformationTest >> createAssociationFrom: aSourceClass to: aTargetClass [
 
 	| association |
@@ -43,4 +57,14 @@ OntoUMLAbstractTransformationTest >> createAssociationFrom: aSourceClass to: aTa
 	association := self createAssociationFrom: aSourceClass to: aTargetClass.
 	association applyStereotype: aStereotype.
 	^ association
+]
+
+{ #category : 'utilities' }
+OntoUMLAbstractTransformationTest >> newControllerWithTransformedClassesFor: aSourceClasses [
+
+	| controller |
+	controller := OntoUMLTransformationController new.
+	aSourceClasses do: [ :sourceClass |
+		controller addTransformationLinkBetween: sourceClass and: (OPUMLClass new name: sourceClass name) ].
+	^ controller
 ]

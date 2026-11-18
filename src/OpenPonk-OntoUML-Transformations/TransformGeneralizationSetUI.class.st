@@ -59,15 +59,16 @@ TransformGeneralizationSetUI class >> title [
 
 { #category : 'specs' }
 TransformGeneralizationSetUI class >> topLayout [
-		^ SpGridLayout new
-		beColumnNotHomogeneous;
-		add: #labelGenSetText at: 1 @ 1;
-		add: #labelGenSetValue at: 2 @ 1;
-		add: #labelGeneralText at: 1 @ 2;
-		add: #labelGeneralValue at: 2 @ 2;
-		add: #labelSpecificText at: 1 @ 3;
-		add: #labelSpecificValue at: 2 @ 3;
-		yourself
+
+	^ SpGridLayout new
+		  beColumnNotHomogeneous;
+		  add: #labelGenSetText atPoint: 1 @ 1;
+		  add: #labelGenSetValue atPoint: 2 @ 1;
+		  add: #labelGeneralText atPoint: 1 @ 2;
+		  add: #labelGeneralValue atPoint: 2 @ 2;
+		  add: #labelSpecificText atPoint: 1 @ 3;
+		  add: #labelSpecificValue atPoint: 2 @ 3;
+		  yourself
 ]
 
 { #category : 'initialization' }
