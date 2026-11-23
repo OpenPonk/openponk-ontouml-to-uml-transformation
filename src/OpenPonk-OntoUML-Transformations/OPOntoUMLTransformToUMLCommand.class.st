@@ -39,5 +39,6 @@ OPOntoUMLTransformToUMLCommand >> defaultMenuItemName [
 { #category : 'execution' }
 OPOntoUMLTransformToUMLCommand >> execute [
 	"Transforms the active OntoUML model into plain UML."
-	TransformationUI transformToUML: self model
+
+	(OPProject openOnModel: (OntoUMLTransformationController transformModel: self model)) showAllElementsInAllDiagrams
 ]

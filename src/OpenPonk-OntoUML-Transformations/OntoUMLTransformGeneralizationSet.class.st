@@ -30,11 +30,12 @@ OntoUMLTransformGeneralizationSet class >> transformWithoutCombination: aTransfo
 
 { #category : 'private - transforming - generalization' }
 OntoUMLTransformGeneralizationSet >> calculateIndex: aIndex for: aElementPosition [
+
 	| positionOffset |
-	positionOffset := 2 raisedTo: (aElementPosition - 1).
-	(aIndex bitAnd: positionOffset) > 0 
-		ifTrue: [ ^ 1. ] 
-		ifFalse: [ ^ 0. ].
+	positionOffset := 2 raisedTo: aElementPosition - 1.
+	^ (aIndex bitAnd: positionOffset) > 0
+		  ifTrue: [ 1 ]
+		  ifFalse: [ 0 ]
 ]
 
 { #category : 'private - transforming - generalization' }
@@ -162,26 +163,25 @@ OntoUMLTransformGeneralizationSet >> getSelection [
 
 { #category : 'transforming' }
 OntoUMLTransformGeneralizationSet >> getSelectionUsingModalWindow [
+
 	| dialogWindow |
-	dialogWindow := TransformGeneralizationSetUI basicNew.
-	dialogWindow model: transformed.
-	dialogWindow initialize.
+	dialogWindow := TransformGeneralizationSetUI on: transformed.
 	dialogWindow openModal.
-	dialogWindow useForAll ifTrue: [ transformer class savedTransformation: dialogWindow transformation. ].
-	^ dialogWindow transformation.
-	
+	dialogWindow useForAll ifTrue: [ transformer class savedTransformation: dialogWindow transformation ].
+	^ dialogWindow transformation
 ]
 
 { #category : 'initialization' }
 OntoUMLTransformGeneralizationSet >> initializeArrays [
-	elements := (transformed collect: [ :generalization | generalization specific. ]) asArray.
-	index := Array new: elements size.
+
+	elements := transformed collect: [ :generalization | generalization specific ] as: Array.
+	index := Array new: elements size
 ]
 
 { #category : 'private - transforming - generalization' }
 OntoUMLTransformGeneralizationSet >> setGeneralProperties [
-	transformer transformed isDisjoint ifTrue: [ self setName. ].
-	transformer transformed isCovering ifTrue: [ transformer general isAbstract: true. ].
+
+	transformer transformed isCovering ifTrue: [ transformer general isAbstract: true ]
 ]
 
 { #category : 'private - transforming - composition' }

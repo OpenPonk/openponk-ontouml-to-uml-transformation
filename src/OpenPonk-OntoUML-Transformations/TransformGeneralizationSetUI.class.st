@@ -47,12 +47,6 @@ TransformGeneralizationSetUI class >> defaultLayout [
 ]
 
 { #category : 'specs' }
-TransformGeneralizationSetUI class >> open [
-	<script>
-	self new openModal
-]
-
-{ #category : 'specs' }
 TransformGeneralizationSetUI class >> title [
 	^ 'Select transformation method for generalization set.'.
 ]
@@ -85,29 +79,25 @@ TransformGeneralizationSetUI >> diagram [
 ]
 
 { #category : 'accessing' }
-TransformGeneralizationSetUI >> diagram: anObject [
-
-	diagram := anObject
-]
-
-{ #category : 'accessing' }
 TransformGeneralizationSetUI >> getGenSetName [
-	^ model first generalizationSets first name ifNil: [ 'nameless'. ].
+
+	^ model first generalizationSets ifEmpty: [ 'nameless' ] ifNotEmpty: [ :sets | sets first name ifNil: [ 'nameless' ] ]
 ]
 
 { #category : 'accessing' }
 TransformGeneralizationSetUI >> getGeneralName [
-	^ model first general name.
+
+	^ model first general name ifNil: [ 'nameless' ]
 ]
 
 { #category : 'accessing' }
 TransformGeneralizationSetUI >> getSpecificNames [
-	| names |
-	names := ''.
-	model do: [ :generalization | names := names , generalization specific name , ', '.
-		names byteSize >= self maxLength ifTrue: [ ^ names withoutSuffix: ', '. ].  ].
-	^ names withoutSuffix: ', '.
-	
+
+	^ String streamContents: [ :stream |
+			  model do: [ :generalization |
+					  stream isEmpty ifFalse: [ stream << ', ' ].
+					  stream << (generalization specific name ifNil: [ 'nameless' ]).
+					  stream position >= self maxLength ifTrue: [ ^ stream contents ] ] ]
 ]
 
 { #category : 'images' }
@@ -162,29 +152,31 @@ TransformGeneralizationSetUI >> initializeImage [
 ]
 
 { #category : 'initialization' }
-TransformGeneralizationSetUI >> initializeLabels [ 
+TransformGeneralizationSetUI >> initializeLabels [
+
 	labelGenSetText := self newLabel.
 	labelGenSetValue := self newLabel.
 	labelGeneralText := self newLabel.
 	labelGeneralValue := self newLabel.
 	labelSpecificText := self newLabel.
 	labelSpecificValue := self newLabel.
-		
-	labelGenSetText label: 'Transfomed generalization set: '.
+
+	labelGenSetText label: 'Transformed generalization set: '.
 	labelGenSetValue label: self getGenSetName.
 	labelGeneralText label: 'Affected general: '.
 	labelGeneralValue label: self getGeneralName.
 	labelSpecificText label: 'Affected specifics: '.
-	labelSpecificValue label: self getSpecificNames.
-	
+	labelSpecificValue label: self getSpecificNames
 ]
 
 { #category : 'initialization' }
 TransformGeneralizationSetUI >> initializePresenters [
+
 	self initializeLabels.
 	self initializeRadioButtons.
 	self initializeImage.
 	transformation := 'Comp'.
+	useForAll := false
 ]
 
 { #category : 'initialization' }
@@ -233,33 +225,15 @@ TransformGeneralizationSetUI >> radioComp [
 ]
 
 { #category : 'accessing' }
-TransformGeneralizationSetUI >> radioComp: anObject [
-
-	radioComp := anObject
-]
-
-{ #category : 'accessing' }
 TransformGeneralizationSetUI >> radioGen [
 
 	^ radioGen
 ]
 
 { #category : 'accessing' }
-TransformGeneralizationSetUI >> radioGen: anObject [
-
-	radioGen := anObject
-]
-
-{ #category : 'accessing' }
 TransformGeneralizationSetUI >> radioGenAndComp [
 
 	^ radioGenAndComp
-]
-
-{ #category : 'accessing' }
-TransformGeneralizationSetUI >> radioGenAndComp: anObject [
-
-	radioGenAndComp := anObject
 ]
 
 { #category : 'actions' }
@@ -280,6 +254,12 @@ TransformGeneralizationSetUI >> selectGeneralization [
 	diagram image: self imageGeneralization.
 ]
 
+{ #category : 'accessing - model' }
+TransformGeneralizationSetUI >> setModelBeforeInitialization: aModel [
+
+	self model: aModel
+]
+
 { #category : 'accessing' }
 TransformGeneralizationSetUI >> transformation [
 
@@ -287,19 +267,7 @@ TransformGeneralizationSetUI >> transformation [
 ]
 
 { #category : 'accessing' }
-TransformGeneralizationSetUI >> transformation: anObject [
-
-	transformation := anObject
-]
-
-{ #category : 'accessing' }
 TransformGeneralizationSetUI >> useForAll [
 
 	^ useForAll
-]
-
-{ #category : 'accessing' }
-TransformGeneralizationSetUI >> useForAll: anObject [
-
-	useForAll := anObject
 ]
